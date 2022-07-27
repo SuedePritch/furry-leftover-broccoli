@@ -6,7 +6,13 @@ const storeSchema = new Schema({
         type: String,
         required: true,
         trim: true
+    },
+    adminId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true, 
     }
+
 });
 
 const Store = mongoose.model('Store', storeSchema);
