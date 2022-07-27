@@ -1,11 +1,12 @@
 // navbar css file
 import '../styles/Navbar.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = (props) =>{
-    function pageChange(event){
-        const id = event.target.id;
-        props.setPage(id);
-    }
+    // function pageChange(event){
+    //     const id = event.target.id;
+    //     props.setPage(id);
+    // }
 
 return (
     <div>
@@ -14,13 +15,13 @@ return (
         {/* thinking drop down for categories */}
         <nav>
   <ul>
-    <li><a href="#">Categories</a></li>
+    <li><Link to="/">Categories</Link></li>
       <ul>
-        <li><a href="#">Clothes</a></li>
-        <li><a href="#">Tech</a></li>
-        <li><a href="#">BBQ</a></li>
-        <li><a href="#">Tools</a></li>
-        <li><a href="#">Clothes Again</a></li>
+        <li><Link to="/">Clothes</Link></li>
+        <li><Link to="/">Tech</Link></li>
+        <li><Link to="/">BBQ</Link></li>
+        <li><Link to="/">Tools</Link></li>
+        <li><Link to="/">Clothes Again</Link></li>
         </ul>
         <li>Login/Logout</li>
         <li>Sign Up</li>
