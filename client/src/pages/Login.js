@@ -1,9 +1,7 @@
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
-// Import Mutation for login
-import { LOGIN_USER } from '';
-// Import auth from utils
-import Auth from '';
+import { LOGIN_USER } from '../utils/mutations.js';
+import Auth from '../utils/auth.js';
 
 import { validateEmail } from '../utils/helpers';
 import '../styles/Login.css';
