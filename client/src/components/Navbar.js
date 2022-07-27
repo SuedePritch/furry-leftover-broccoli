@@ -1,5 +1,5 @@
 // navbar css file
-import './Navbar.css';
+import '../styles/Navbar.css';
 
 const Navbar = (props) =>{
     function pageChange(event){
