@@ -1,4 +1,4 @@
-::root{
+:root{
   --clr-accent-500:hsl(348, 98%, 52%);
   --clr-primary-200: hsl(243, 45%, 20%);
   --clr-primary-400: hsl(242, 45%, 40%);
@@ -8,12 +8,14 @@
   
 }
 
-*
-*::before,
-*::after{
+*{
   padding:0;
   margin:0;
   box-sizing: border-box;
+}
+body{
+  background-color: var(--clr-primary-400);
+  color: var(--clr-primary-800) 
 }
 h1{
   font-family: 'Seagram';
