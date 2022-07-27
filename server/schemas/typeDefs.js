@@ -17,10 +17,10 @@ type Products {
     name: String
     description: String
     images: String
-    price: Int
-    cost: Int
+    price: Float
+    cost: Float
     parStock: Int
-    quanitity: Int
+    quantity: Int
     category: [Category]
 }
 
