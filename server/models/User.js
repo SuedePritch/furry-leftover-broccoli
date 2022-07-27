@@ -28,7 +28,7 @@ const userSchema = new Schema(
       match: [/^(?:4\d{3}|5[1-5]\d{2}|6011|3[47]\d{2})([-\s]?)\d{4}\1\d{4}\1\d{3,4}$/, 'must use valid credit card number'],
     },
     // set true for admin user
-    permissions: {
+    isAdmin: {
       type: Boolean,
       required: false,
       default: false,

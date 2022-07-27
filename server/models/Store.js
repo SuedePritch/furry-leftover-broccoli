@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const categorySchema = new Schema({
+const storeSchema = new Schema({
     name: {
         type: String,
         required: true,
         trim: true
+    },
+    adminId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true, 
     }
+
 });
 
-const Category = mongoose.model('Category', categorySchema);
+const Store = mongoose.model('Store', storeSchema);
 
-module.exports = Category;
+module.exports = Store;
