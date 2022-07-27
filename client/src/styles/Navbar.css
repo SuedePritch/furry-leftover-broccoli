@@ -1,0 +1,27 @@
+.navbar-container{
+    height:10vh;
+    background-color: var(--clr-primary-600);
+    color: var(--clr-primary-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:1rem 1.5rem;
+    border-bottom: 14px solid var(--clr-primary-200);
+}
+h1{
+    font-size: 3.5em;
+}
+ul{
+    display: flex;
+}
+li{
+    padding:0 1rem;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
+li > *{
+    font-size: 1.3em;
+    text-decoration: none;
+    color:var(--clr-primary-500)
+}

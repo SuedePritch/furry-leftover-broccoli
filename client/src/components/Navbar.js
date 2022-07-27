@@ -9,23 +9,18 @@ const Navbar = (props) =>{
     // }
 
 return (
-    <div>
-        <h1>Website Title</h1>
+    <div className='navbar-container'>
+        <h1>Inventory Management</h1>
         
-        {/* thinking drop down for categories */}
-        <nav>
   <ul>
-    <li><Link to="/">Categories</Link></li>
-      <ul>
+        <li><Link to="/">Categories</Link></li>
         <li><Link to="/">Clothes</Link></li>
         <li><Link to="/">Tech</Link></li>
         <li><Link to="/">BBQ</Link></li>
         <li><Link to="/">Tools</Link></li>
-        <li><Link to="/">Clothes Again</Link></li>
-        </ul>
-        <li>Login/Logout</li>
-        <li>Sign Up</li>
-        </ul></nav>
+        <li><Link to="/">Login/Signup</Link></li>
+        
+  </ul>
       
 
     </div>
