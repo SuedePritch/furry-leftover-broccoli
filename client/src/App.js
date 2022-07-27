@@ -10,7 +10,7 @@ import { setContext } from '@apollo/client/link/context';
 
 
 
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 require('dotenv').config();
 
 const httpLink = createHttpLink({
@@ -43,7 +43,7 @@ function App() {
     <ApolloProvider client={client}>
     <Router>
       <>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           {/* <Route 
             path='/' 
@@ -63,3 +63,6 @@ function App() {
     </ApolloProvider>
   );
 }
+
+
+export default App;
