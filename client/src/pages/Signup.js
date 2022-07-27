@@ -2,7 +2,7 @@
 import { validateEmail } from '../utils/helpers';
 
 // sign up css file
-import '..styles/Signup.css';
+import '../styles/Signup.css';
 
 const Signup = () =>{
 
