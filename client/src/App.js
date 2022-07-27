@@ -10,8 +10,12 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 
+import Navbar from './components/Navbar';
+import Footer from './components/Footer'
+import SingleProduct from './pages/SingleProduct'
 
-// import Navbar from './components/Navbar';
+
+
 require('dotenv').config();
 
 const httpLink = createHttpLink({
@@ -44,12 +48,12 @@ function App() {
     <ApolloProvider client={client}>
     <Router>
       <>
-        {/* <Navbar /> */}
+        <Navbar />
         <Routes>
-          {/* <Route 
+          <Route 
             path='/' 
-            element={<SearchBooks />} 
-          /> */}
+            element={<SingleProduct />} 
+          />
           {/* <Route 
             path='/saved' 
             element={<SavedBooks />} 
@@ -59,6 +63,7 @@ function App() {
             element={<h1 className='display-2'>Wrong page!</h1>}
           />
         </Routes>
+        <Footer />
       </>
     </Router>
     </ApolloProvider>
