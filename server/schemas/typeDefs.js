@@ -16,7 +16,7 @@ type Products {
     _id: ID
     name: String
     description: String
-    images: String
+    images: [String]
     price: Float
     cost: Float
     parStock: Int
@@ -54,7 +54,7 @@ type Query {
     stores: [Store]
     store(_id: ID!): Store
     categories: [Category]
-    products(category: ID, name: String): [Products]
+    products: [Products]
     product(_id: ID!): Products
     user: User
     order(_id: ID!): Order
