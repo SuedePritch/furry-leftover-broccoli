@@ -51,10 +51,10 @@ userSchema.pre('save', async function (next) {
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
 
-  if (this.isNew || this.isModified('creditCard')) {
-    const saltRounds = 10;
-    this.creditCard = await bcrypt.hash(this.creditCard, saltRounds);
-  }
+  // if (this.isNew || this.isModified('creditCard')) {
+  //   const saltRounds = 10;
+  //   this.creditCard = await bcrypt.hash(this.creditCard, saltRounds);
+  // }
   next();
 });
 

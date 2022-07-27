@@ -12,15 +12,15 @@ type Category {
     name: String
 }
 
-type Product {
+type Products {
     _id: ID
     name: String
     description: String
     images: String
-    price: Number
-    cost: Number
-    parStock: Number
-    quanitity: Number
+    price: Int
+    cost: Int
+    parStock: Int
+    quanitity: Int
     category: [Category]
 }
 
@@ -35,7 +35,7 @@ type User {
     username: String
     email: String
     password: String
-    creditCard: Number
+    creditCard: Int
     isAdmin: Boolean
     premium: Boolean
     orders: [Order] 
