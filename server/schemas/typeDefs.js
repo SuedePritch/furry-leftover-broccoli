@@ -61,6 +61,7 @@ type Query {
     user: User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
+    
 }
 
 type Mutation {
@@ -68,6 +69,7 @@ addUser(username: String!, email: String! password: String!): Auth
 addOrder(products: [ID]!): Order
 login(email: String!, password: String!): Auth
 sellProduct(_id: ID!, quantity: Int!): Products
+addProduct(category: ID!): Category
 }
 
 `;
