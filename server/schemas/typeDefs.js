@@ -5,6 +5,7 @@ type Store {
     _id: ID
     name: String
     adminId: User
+    category: [Category]
 }
 
 type Category {
