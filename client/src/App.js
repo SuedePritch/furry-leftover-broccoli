@@ -14,14 +14,13 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-// import SingleProduct from './pages/SingleProduct'
+import ProductPage from './pages/ProductPage'
 import AllCategories from './pages/AllCategories';
 import CategoryPage from './pages/CategoryPage';
 
 
 
 require('dotenv').config();
-
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
@@ -57,8 +56,11 @@ function App() {
         <Routes>
           <Route 
             path='/' 
-            // element={<SingleProduct />} 
             element={<AllCategories />} 
+            />
+          <Route 
+            path='/product/:productId' 
+            element={<ProductPage />} 
           />
           <Route 
             path='/login' 

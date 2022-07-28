@@ -32,6 +32,11 @@ const resolvers = {
 
 
     //All Products
+    allproducts:async (parent) =>{
+      return await Products.find({})
+    },
+
+    //products by category or name
     products: async (parent, {category, name}) => {
       const params = {};
 
