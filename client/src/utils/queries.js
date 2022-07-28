@@ -19,3 +19,17 @@ user {
     }
 }
 `;
+export const GET_ALL_PRODUCTS = gql`
+query allProducts {
+    products {
+        name
+        description
+        images
+        price
+        category {
+            _id
+            name
+        }
+    }
+}
+`;
