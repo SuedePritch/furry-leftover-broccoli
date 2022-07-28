@@ -11,9 +11,8 @@ let productList;
   if(!loading && !error){
     productList = data.products
   }
-  console.log(productList)
     return(
-        <div>
+        <div className='product-container'>
         {productList.map((product) => {
             return <div>
                     <img src={product.images[0]} alt="alternate"/>
