@@ -1,7 +1,8 @@
 import '../styles/AllCategories.css';
+import { Link } from 'react-router-dom'
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { useQuery } from '@apollo/client';
-
+const url = "localhost:3000/" 
 const AllCategories = () => {
 // info for queries to show products
 let productList;
@@ -12,69 +13,19 @@ let productList;
     productList = data.products
   }
     return(
-        <div className='product-container'>
+        <div className="product-container">
         {productList.map((product) => {
-            return <div>
-                    <img src={product.images[0]} alt="alternate"/>
-                    <p>{product.name}</p>
-                    <p>{product.description}</p>
-            </div>
+            const linkaddress = url.concat(product._id)
+            return  <Link to={linkaddress} className="product" key={product._id}>
+                        <img src={product.images[0]} alt="alternate"/>
+                        <div className="details">
+                            <h2 className='product-name'>{product.name}</h2>
+                            <p className='price'>{product.price}</p>
+                        </div>
+                            <button className='add-to-cart-btn'>Add to Cart</button>
+                    </Link>
+        
         })} 
-
-
-
-            <div className='category'>
-            <h3>Category 1</h3>    
-                
-                <div>
-                    <img src="https://via.placeholder.com/250" alt="alternate"/>
-                    <p>Product Name 2</p>
-                    <p>Price</p>
-                </div>
-                <div>
-                    <img src="https://via.placeholder.com/250" alt="alternate"/>
-                    <p>Product Name 3</p>
-                    <p>Price</p>
-                </div>
-            </div>
-            <div className='category'>
-            <h3>Category 2</h3>
-            <div>
-                    <img src="https://via.placeholder.com/250" alt="alternate"/>
-                    <p>Product Name 1 </p>
-                    <p>Price</p>
-                </div>
-                <div>
-                    <img src="https://via.placeholder.com/250" alt="alternate"/>
-                    <p>Product Name 2 </p>
-                    <p>Price</p>
-                </div>
-                <div>
-                    <img src="https://via.placeholder.com/250" alt="alternate"/>
-                    <p>Product Name 3</p>
-                    <p>Price</p>
-                </div>
-            </div>
-
-            <div className='category'>
-            <h3>Category 3</h3>
-            <div>
-                    <img src="https://via.placeholder.com/250" alt="alternate"/>
-                    <p>Product Name 1 </p>
-                    <p>Price</p>
-                </div>
-                <div>
-                    <img src="https://via.placeholder.com/250" alt="alternate"/>
-                    <p>Product Name 2</p>
-                    <p>Price</p>
-                </div>
-                <div>
-                    <img src="https://via.placeholder.com/250" alt="alternate"/>
-                    <p>Product Name 3</p>
-                    <p>Price</p>
-                </div>
-            </div>
-
         </div>
     )
 }

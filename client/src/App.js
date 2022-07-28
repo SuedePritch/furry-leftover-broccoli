@@ -22,6 +22,7 @@ import CategoryPage from './pages/CategoryPage';
 
 require('dotenv').config();
 
+
 const httpLink = createHttpLink({
   uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
@@ -68,12 +69,12 @@ function App() {
             element={<Signup />} 
           />
           <Route 
-            path='*'
-            element={<h1 className='display-2'>Wrong page!</h1>}
-          />
-          <Route 
           path='/categories'
           element={<CategoryPage />}
+          />
+          <Route 
+            path='*'
+            element={<h1 className='display-2'>Wrong page!</h1>}
           />
         </Routes>
         <Footer />
