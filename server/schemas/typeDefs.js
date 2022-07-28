@@ -66,6 +66,7 @@ type Mutation {
 addUser(username: String!, email: String! password: String!): Auth
 addOrder(products: [ID]!): Order
 login(email: String!, password: String!): Auth
+sellProduct(_id: ID!, quantity: Int!): Products
 }
 
 `;

@@ -48,10 +48,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in! resolvers');
   
     },
-
-
-
-    
+    //cart for that user
     order: async (parent, { _id }, context) => {
       const user = await User.findById(
         {_id: context.user._id}
@@ -59,12 +56,7 @@ const resolvers = {
 
       return user.orders.id(_id);
     },
-
-
-
-
-
-
+    //
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products});
@@ -110,12 +102,14 @@ const resolvers = {
 
 
   Mutation: {
+
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
 
       return { token, user };
     },
+
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 
@@ -132,7 +126,23 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+
+    addOrder: async (parent, { products }, context) => {
+      if(context.user) {
+        const order = new Order({ products });
+
+        await User.findByIdAndUpdate(context.user._id, { $push: { orders: order }});
+
+        return order;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+    sellProduct: async (parent, {_id, quantity}) => {
+      const decrement = Math.abs(quantity)* -1;
+      return await Products.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true});
+    },
 
     },
 };
