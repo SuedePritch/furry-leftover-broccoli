@@ -16,6 +16,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 // import SingleProduct from './pages/SingleProduct'
 import AllCategories from './pages/AllCategories';
+import CategoryPage from './pages/CategoryPage';
 
 
 
@@ -69,6 +70,10 @@ function App() {
           <Route 
             path='*'
             element={<h1 className='display-2'>Wrong page!</h1>}
+          />
+          <Route 
+          path='/categories'
+          element={<CategoryPage />}
           />
         </Routes>
         <Footer />

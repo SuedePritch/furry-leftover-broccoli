@@ -14,7 +14,7 @@ return (
         
   <ul>
         <li><Link to="/">Categories</Link></li>
-        <li><Link to="/">Clothes</Link></li>
+        <li><Link to="/categories">Clothes</Link></li>
         <li><Link to="/">Tech</Link></li>
         <li><Link to="/">BBQ</Link></li>
         <li><Link to="/">Tools</Link></li>
