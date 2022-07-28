@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { LOGIN_USER } from '../utils/mutations.js';
 import Auth from '../utils/auth.js';
 
-// import { validateEmail } from '../utils/helpers';
+import { validateEmail } from '../utils/helpers';
 import '../styles/Login.css';
 
 const LoginForm = () => {
@@ -24,11 +24,11 @@ const LoginForm = () => {
         }
     };
 
-    // const emailIsValid = (e) =>{
-    //     if (!validateEmail(e.value)){
-    //       alert('Please enter an actual email');
-    //     };
-    //   };
+    const emailIsValid = (e) =>{
+        if (!validateEmail(e.value)){
+          alert('Please enter an actual email');
+        };
+      };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -53,7 +53,7 @@ const LoginForm = () => {
                     <input placeholder='*******' name='password' type='password' id='password'
                         onChange={handleChange}></input>
                 </div>
-                <button type='submit'>Login </button>
+                <button type='submit' onClick={emailIsValid}>Login </button>
             </form>
         </div>
     )
