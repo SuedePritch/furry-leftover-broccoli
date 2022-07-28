@@ -1,44 +1,66 @@
-// an email validation from helpers
-import { validateEmail } from '../utils/helpers';
+import { useMutation } from '@apollo/client';
+import React, { useState } from 'react';
+import { ADD_USER } from '../utils/mutations.js';
+import Auth from '../utils/auth.js';
+// import { validateEmail } from '../utils/helpers';
 
 // sign up css file
 import '../styles/Signup.css';
 
 const Signup = () =>{
+    // const emailIsValid = (e) =>{
+    //     if (!validateEmail(e.value)){
+    //       alert('Please enter an actual email');
+    //     };
+    //   };
+    // BUILD MUTATION FOR LOGIN_USER
+    const [addUser] = useMutation(ADD_USER);
+    const [signupFormData, setSignupFormData] = useState({ email: '', password: ''});
 
-    const form = useRef();
-
-    const emailIsValid = (e) =>{
-        if (!validateEmail(e.value)){
-          alert('Please enter an actual email');
-        };
-      };
+    const handleFormSubmit = async (event) => {
+      event.preventDefault();
+      try {
+          const userMutationResponse = await addUser ({
+              variables: { username: signupFormData.username, email: signupFormData.email, password: signupFormData.password},
+          });
+          const token = userMutationResponse.data.login.token;
+          Auth.login(token);
+      } catch (e) {
+          console.log(e);
+      }
+  };
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setSignupFormData({
+          ...signupFormData,
+          [name]: value,
+      });
+  };
 
 return(
-    <div className='signup-fprm'>
-      <form ref={form}>
-        <ul>
-      <li>    
-      <label>Username</label>
-      <input type="text" name="username"/>
-      </li>
-      
-      <li>
-      <label>Email</label>
-      <input type="email" name="user_email" onBlur={emailIsValid} />
-      </li>
-     
-      <li>
-        <label>Password</label>
-       <textarea name="password" />
-            
-      </li>
-      <li>
-      <input id="submit-button" type="submit" value="SUBMIT" />
-      </li>
-       </ul>
-    </form>
-   </div>
+  <div className='signup-form-container'>
+  <h2 className='signup-form-title'>Signup</h2>
+  <form className='signup-form' onSubmit={handleFormSubmit}>
+      <div className='signup'>
+          <label htmlFor='username'>Username</label>
+          <input placeholder='Username' name= 'username' type='username' id='username' 
+              // onBlur={emailIsValid}
+              onChange={handleChange}></input>
+      </div>
+      <div className='signup'>
+          <label htmlFor='email'>Email Address:</label>
+          <input placeholder='Email' name= 'email' type='email' id='email' 
+              // onBlur={emailIsValid}
+              onChange={handleChange}></input>
+      </div>
+      <div className='signup'>
+          <label htmlFor='pwd'>Password:</label>
+          <input placeholder='Password' name='password' type='password' id='password'
+              onChange={handleChange}></input>
+      </div>
+      <button type='submit'>signup </button>
+  </form>
+</div>
 )
 }
 

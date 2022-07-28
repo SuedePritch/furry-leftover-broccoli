@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { LOGIN_USER } from '../utils/mutations.js';
 import Auth from '../utils/auth.js';
 
-import { validateEmail } from '../utils/helpers';
+// import { validateEmail } from '../utils/helpers';
 import '../styles/Login.css';
 
 const LoginForm = () => {
     // BUILD MUTATION FOR LOGIN_USER
-    const [login, { error }] = useMutation(LOGIN_USER);
+    const [login] = useMutation(LOGIN_USER);
     const [userFormData, setUserFormData] = useState({ email: '', password: ''});
 
     const handleFormSubmit = async (event) => {
@@ -24,11 +24,11 @@ const LoginForm = () => {
         }
     };
 
-    const emailIsValid = (e) =>{
-        if (!validateEmail(e.value)){
-          alert('Please enter an actual email');
-        };
-      };
+    // const emailIsValid = (e) =>{
+    //     if (!validateEmail(e.value)){
+    //       alert('Please enter an actual email');
+    //     };
+    //   };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -42,13 +42,13 @@ const LoginForm = () => {
         <div className='login-form-container'>
             <h2 className='login-form-title'>Login</h2>
             <form className='login-form' onSubmit={handleFormSubmit}>
-                <div className='login-email'>
+                <div className='login'>
                     <label htmlFor='email'>Email Address:</label>
                     <input placeholder='insert@email.com' name= 'email' type='email' id='email' 
-                        onBlur={emailIsValid}
+                        // onBlur={emailIsValid}
                         onChange={handleChange}></input>
                 </div>
-                <div className='login-password'>
+                <div className='login'>
                     <label htmlFor='pwd'>Password:</label>
                     <input placeholder='*******' name='password' type='password' id='password'
                         onChange={handleChange}></input>

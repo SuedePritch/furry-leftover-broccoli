@@ -1,0 +1,34 @@
+.signup-form-container{
+    position: relative;
+    right:0;
+    left:0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width:50vw;
+}
+.signup-form-title{
+    margin:2rem;
+    font-size: 5em;
+    text-align: center;
+}
+.signup-form{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-rows: 1fr;
+    gap:2rem;
+}
+.signup{
+    grid-column: span 1;
+}
+.signup > * {
+    margin:1rem;
+    width:100%;
+    padding:1rem 1.5rem;
+    font-size: 1.75em;
+}
+button{
+    font-size: 2em;
+    width:50%;
+    transform: translateX(50%);
+}
