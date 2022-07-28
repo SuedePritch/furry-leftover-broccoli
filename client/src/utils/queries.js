@@ -22,11 +22,12 @@ user {
 export const GET_ALL_PRODUCTS = gql`
 query allProducts {
     products {
+        _id
         name
         description
         images
         price
-        category {
+        category {git add
             _id
             name
         }
