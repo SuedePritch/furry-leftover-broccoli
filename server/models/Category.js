@@ -7,6 +7,10 @@ const categorySchema = new Schema({
         required: true,
         trime: true
     },
+    products: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Products'
+    }] 
 });
 
 const Category = mongoose.model('Category', categorySchema);

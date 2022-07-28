@@ -11,6 +11,7 @@ type Store {
 type Category {
     _id: ID
     name: String
+    products: [Products]
 }
 
 type Products {
