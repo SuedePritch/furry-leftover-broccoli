@@ -33,3 +33,18 @@ query allProducts {
     }
 }
 `;
+
+export const GET_SINGLE_CATEGORY = gql`
+query Categories {
+    categories {
+      _id
+      name
+      products {
+        _id
+         name
+        images
+        price
+      }
+    }
+  }
+`
