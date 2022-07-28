@@ -2,16 +2,20 @@ import '../styles/AllCategories.css';
 import { Link } from 'react-router-dom'
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { useQuery } from '@apollo/client';
-const url = "localhost:3000/" 
+
+
+const url = "/product/" 
+
+
 const AllCategories = () => {
 // info for queries to show products
 let productList;
- const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
- if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
-  if(!loading && !error){
-    productList = data.products
-  }
+const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+    if(!loading && !error){
+    productList = data.allproducts
+    }
     return(
         <div className="product-container">
         {productList.map((product) => {
