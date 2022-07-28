@@ -7,49 +7,64 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
+
+    // All Stores
     stores: async () => {
       return await Store.find();
     },
-    store: async (parent, { _id }) => {
+
+
+    //Single Store
+    store: async (parent, { _id }, context) => {
       return await Store.findById(_id)
     },
+
+
+    //All Categories
     categories: async () => {
       return await Category.find();
     },
-    products: async (parent, {category, name}) => {
-      const params = {};
 
-      if (category) {
-        params.category = category;
-      }
 
-      if (name) {
-        params.name = name
-      }
-
-     return await Products.find(params).populate('category'); 
+    //All Products
+    products: async () => {
+      return await Products.find();
     },
+      
+
+    //Single Product
     product: async (parent, { _id }) => {
-      return await Products.findById(_id).populate('category');
+      return await Products.findById(_id);
     },
-    user: async (parent, args)=> {
-      const user = await User.findById(user._id).populate({
-        path: 'orders.products',
-        populate: 'category'
-      });
 
-      user.orders.sort((a,b) => b.purchaseDate = a.purchaseDate);
 
-      return user
+    //Single User
+    user: async (parent, { _id }, context)=> {  
+      if (context.user) {
+      return User.findOne({
+          _id: context.user._id 
+          });
+      }
+      throw new AuthenticationError('You need to be logged in! resolvers');
+  
     },
-    order: async (parent, { _id }) => {
-      const user = await User.findById(user._id).populate({
-        path: 'orders.products',
-        populate: 'category'
-      });
+
+
+
+    
+    order: async (parent, { _id }, context) => {
+      const user = await User.findById(
+        {_id: context.user._id}
+        );
 
       return user.orders.id(_id);
     },
+
+
+
+
+
+
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products});
@@ -88,6 +103,12 @@ const resolvers = {
     }
     
   },
+
+
+
+
+
+
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);

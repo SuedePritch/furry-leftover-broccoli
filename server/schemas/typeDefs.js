@@ -5,6 +5,7 @@ type Store {
     _id: ID
     name: String
     adminId: User
+    category: [Category]
 }
 
 type Category {
@@ -16,11 +17,11 @@ type Products {
     _id: ID
     name: String
     description: String
-    images: String
-    price: Int
-    cost: Int
+    images: [String]
+    price: Float
+    cost: Float
     parStock: Int
-    quanitity: Int
+    quantity: Int
     category: [Category]
 }
 
@@ -54,7 +55,7 @@ type Query {
     stores: [Store]
     store(_id: ID!): Store
     categories: [Category]
-    products(category: ID, name: String): [Products]
+    products: [Products]
     product(_id: ID!): Products
     user: User
     order(_id: ID!): Order
