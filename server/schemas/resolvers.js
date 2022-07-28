@@ -10,19 +10,19 @@ const resolvers = {
 
     // All Stores
     stores: async () => {
-      return await Store.find();
+      return await Store.find().populate('category').populate('adminId');
     },
 
 
     //Single Store
     store: async (parent, { _id }, context) => {
-      return await Store.findById(_id)
+      return await Store.findById(_id).populate('category').populate('adminId')
     },
 
 
     //All Categories
     categories: async () => {
-      return await Category.find();
+      return await Category.find().populate('products');
     },
 
 
@@ -34,7 +34,7 @@ const resolvers = {
 
     //Single Product
     product: async (parent, { _id }) => {
-      return await Products.findById(_id);
+      return await Products.findById({_id});
     },
 
 
