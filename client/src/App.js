@@ -14,7 +14,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import SingleProduct from './pages/SingleProduct'
+// import SingleProduct from './pages/SingleProduct'
+import AllCategories from './pages/AllCategories';
 
 
 
@@ -54,7 +55,8 @@ function App() {
         <Routes>
           <Route 
             path='/' 
-            element={<SingleProduct />} 
+            // element={<SingleProduct />} 
+            element={<AllCategories />} 
           />
           <Route 
             path='/login' 
