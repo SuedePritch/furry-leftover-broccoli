@@ -11,7 +11,9 @@ import { setContext } from '@apollo/client/link/context';
 
 
 import Navbar from './components/Navbar';
-import Footer from './components/Footer'
+import Footer from './components/Footer';
+import Login from './pages/Login'
+import Signup from './pages/Signup'
 import SingleProduct from './pages/SingleProduct'
 
 
@@ -19,7 +21,7 @@ import SingleProduct from './pages/SingleProduct'
 require('dotenv').config();
 
 const httpLink = createHttpLink({
-  uri: 'https://localhost:3001/graphql',
+  uri: 'http://localhost:3001/graphql',
   cache: new InMemoryCache(),
 });
 
@@ -54,10 +56,14 @@ function App() {
             path='/' 
             element={<SingleProduct />} 
           />
-          {/* <Route 
-            path='/saved' 
-            element={<SavedBooks />} 
-          /> */}
+          <Route 
+            path='/login' 
+            element={<Login />} 
+          />
+          <Route 
+            path='/signup' 
+            element={<Signup />} 
+          />
           <Route 
             path='*'
             element={<h1 className='display-2'>Wrong page!</h1>}

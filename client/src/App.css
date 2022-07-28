@@ -1,9 +1,10 @@
 :root{
   --clr-accent-500:hsl(348, 98%, 52%);
-  --clr-primary-200: hsl(243, 45%, 20%);
-  --clr-primary-400: hsl(242, 45%, 40%);
-  --clr-primary-600: hsl(242, 45%, 60%);
-  --clr-primary-800: hsl(242, 61%, 88%);
+  --clr-primary-200: hsl(33, 7%, 6%);
+  --clr-primary-400: hsl(33, 67%, 40%);
+  --clr-primary-600: hsl(33, 47%, 60%);
+  --clr-primary-800: hsl(33, 77%, 88%);
+  
 
   
 }
