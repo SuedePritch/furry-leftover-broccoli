@@ -68,7 +68,8 @@ type Query {
 
     # CATEGORIES
     categories: [Category]
-    catergory(_id: ID!): Category
+    category(_id: ID!): Category
+
 
 
     # PRODUCTS

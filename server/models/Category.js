@@ -5,7 +5,7 @@ const categorySchema = new Schema({
     name: {
         type: String,
         required: true,
-        trime: true
+        trim: true
     },
     products: [{
         type: Schema.Types.ObjectId,

@@ -31,8 +31,8 @@ const resolvers = {
     },
 
     //Single Category
-    catergory: async (parent, { _id }) => {
-      return await Category.findById(_id).populate('product')
+    category: async (parent, { _id }) => {
+      return await Category.findById(_id).populate('products')
     },
 
 
