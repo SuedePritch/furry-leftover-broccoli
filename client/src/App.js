@@ -51,7 +51,7 @@ function App() {
 
 
           {/* Category Routes */}
-          <Route path='/categories'element={<CategoryPage />}/>
+          <Route path='/category/:categoryId'element={<CategoryPage />}/>
 
 
           {/* Wildcard/404 Routes - Needs to stay at the bottom */}

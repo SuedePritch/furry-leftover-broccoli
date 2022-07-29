@@ -3,24 +3,28 @@ import '../styles/AllCategories.css';
 
 import { GET_SINGLE_CATEGORY } from '../utils/queries';
 import { useQuery } from "@apollo/client";
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
-const url = "/categories/" 
+const url = "/product/" 
 
 const SingleCategory = () => {
-// call the query for category/cat
     let category;
-    // const { categoryId } = useParams;
-  const { loading, error, data } = useQuery(GET_SINGLE_CATEGORY, {variables: {id:"62e18b19df691851404f8b61"}});
+    let categoryName;
+    const { categoryId } = useParams();
+  const { loading, error, data } = useQuery(GET_SINGLE_CATEGORY,{
+    variables: {id: categoryId }
+  });
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
     if(!loading && !error){
       category = data.category.products
+      categoryName = data.category.name
     }
-    console.log(category[0])
 
     return(
+      <>
+          <h2>{categoryName}</h2>
         <div className="product-container">
         {category.map((products) => {
             const linkaddress = url.concat(products._id);
@@ -36,6 +40,7 @@ const SingleCategory = () => {
         )
         })} 
         </div>
+      </>
     )
 }
 

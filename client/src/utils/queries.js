@@ -59,7 +59,20 @@ query product($id: ID!) {
   }
 `;
 
-
+export const GET_ALL_CATEGORIES = gql`
+query Categories {
+  categories {
+    _id
+    name
+    products {
+      _id
+      name
+      images
+      price
+    }
+  }
+}
+`
 export const GET_SINGLE_CATEGORY = gql`
 query Category($id: ID!) {
     category(_id: $id) {
