@@ -31,6 +31,14 @@ type Order {
     purchaseDate: String
     products: [Products]
 }
+type OrderInc {
+    _id: ID
+    createdAt: {
+        type: String
+        products: [Products]
+        deliveryDate: String
+    }
+}
 
 type User {
     _id: ID
@@ -61,6 +69,8 @@ type Query {
     user: User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
+    orderInc: [OrderInc]
+    orderIncById: (_id: ID!): OrderInc
     
 }
 
