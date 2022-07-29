@@ -1,15 +1,13 @@
 import React from 'react';
-import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  createHttpLink,
-} from '@apollo/client';
+import {ApolloClient,InMemoryCache,ApolloProvider,createHttpLink,} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 
+// Styling Imports
+import './App.css'
+
+// Component Imports
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Login from './pages/Login'
@@ -19,31 +17,14 @@ import AllCategories from './pages/AllCategories';
 import CategoryPage from './pages/CategoryPage';
 
 
-
 require('dotenv').config();
 
-const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql',
-  cache: new InMemoryCache(),
-});
 
-// Construct request middleware that will attach the JWT token to every request as an `authorization` header
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
-  // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  };
-});
-const client = new ApolloClient({
-  // Set up our client to execute the `authLink` middleware prior to making the request to our GraphQL API
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+// APOLLO CONFIG
+//THIS HTTPLINK NEEDS TO BE UPDATED TO THE DEPLOYED URL 
+const httpLink = createHttpLink({uri: 'http://localhost:3001/graphql',cache: new InMemoryCache(),});
+const authLink = setContext((_, { headers }) => {const token = localStorage.getItem('id_token');return {headers: {...headers,authorization: token ? `Bearer ${token}` : '',},}});
+const client = new ApolloClient({link: authLink.concat(httpLink),cache: new InMemoryCache(),});
 
 
 
@@ -53,32 +34,32 @@ function App() {
     <Router>
       <>
         <Navbar />
+        
+        
         <Routes>
-          <Route 
-            path='/' 
-            element={<AllCategories />} 
-            />
-          <Route 
-            path='/product/:productId' 
-            element={<ProductPage />} 
-          />
-          <Route 
-            path='/login' 
-            element={<Login />} 
-          />
-          <Route 
-            path='/signup' 
-            element={<Signup />} 
-          />
-          <Route 
-          path='/categories'
-          element={<CategoryPage />}
-          />
-          <Route 
-            path='*'
-            element={<h1 className='display-2'>Wrong page!</h1>}
-          />
+          {/* Auth Routes */}
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+
+
+          {/* Main Landing Page */}
+          <Route path='/' element={<AllCategories />} />
+
+
+          {/* Product Routes */}
+          <Route path='/product/:productId' element={<ProductPage />} />
+
+
+          {/* Category Routes */}
+          <Route path='/categories'element={<CategoryPage />}/>
+
+
+          {/* Wildcard/404 Routes - Needs to stay at the bottom */}
+          <Route path='*'element={<h1 className='display-2'>Wrong page!</h1>}/>
         </Routes>
+
+
+
         <Footer />
       </>
     </Router>

@@ -8,7 +8,15 @@ const url = "/product/"
 
 
 const AllCategories = () => {
-// info for queries to show products
+
+//ALERT: WE ACTUALLY WANT TO SEE PRODUCTS BY CATEGORY HERE 
+//THIS MAY NOT BE USEFUL OTHER THAN AS LOGIC TEMPLATE 
+//WAS MAINLY USED TO SET UP STYLING
+//USE OF THESE CLASSNAMES SHOULD BE MAINTAINED
+
+// Display all products
+// iterates over the list of products and creates a link to the single product page
+//shows image, name, price, and add to cart button
 let productList;
 const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
     if (loading) return 'Loading...';

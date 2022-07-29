@@ -34,6 +34,15 @@ query allProducts {
     }
 }
 `;
+
+export const QUERY_CHECKOUT = gql`
+  query getCheckout($products: [ID]!) {
+    checkout(products: $products) {
+      session
+    }
+  }
+`;
+
 export const GET_SINGLE_PRODUCT = gql`
 query product($id: ID!) {
     product(_id: $id) {
@@ -64,3 +73,4 @@ query Category($id: ID!) {
     }
   }
 `
+
