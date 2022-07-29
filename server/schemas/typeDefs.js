@@ -74,6 +74,7 @@ type Query {
 
     # PRODUCTS
     allproducts: [Products]
+    productsbycategory: [Products]
     products: [Products]
     product(_id: ID!): Products
 

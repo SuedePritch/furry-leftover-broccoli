@@ -1,3 +1,17 @@
+.category-container{
+    display: flex;
+    justify-content: space-evenly;
+    /* z-index: 2; */
+}
+
+
+
+
+
+
+
+
+
 .product-container{
     margin:2rem;
     display: grid;
