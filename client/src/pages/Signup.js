@@ -2,17 +2,17 @@ import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { ADD_USER } from '../utils/mutations.js';
 import Auth from '../utils/auth.js';
-// import { validateEmail } from '../utils/helpers';
 
 // sign up css file
 import '../styles/Signup.css';
+import { validateEmail } from '../utils/helpers.js';
 
 const Signup = () =>{
-    // const emailIsValid = (e) =>{
-    //     if (!validateEmail(e.value)){
-    //       alert('Please enter an actual email');
-    //     };
-    //   };
+    const emailIsValid = (email) =>{
+        if (!validateEmail(email)){
+          alert('Please enter an actual email');
+        };
+      };
     // BUILD MUTATION FOR LOGIN_USER
     const [addUser] = useMutation(ADD_USER);
     const [signupFormData, setSignupFormData] = useState({ email: '', password: ''});
@@ -58,7 +58,7 @@ return(
           <input placeholder='Password' name='password' type='password' id='password'
               onChange={handleChange}></input>
       </div>
-      <button type='submit'>signup </button>
+      <button type='submit' onClick={emailIsValid}>signup </button>
   </form>
 </div>
 )
