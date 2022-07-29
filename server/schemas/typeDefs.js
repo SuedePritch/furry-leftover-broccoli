@@ -56,11 +56,14 @@ type Query {
     stores: [Store]
     store(_id: ID!): Store
     categories: [Category]
+    catergory(_id: ID!): Category
+    allproducts: [Products]
     products: [Products]
     product(_id: ID!): Products
     user: User
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
+    
 }
 
 type Mutation {
@@ -68,6 +71,7 @@ addUser(username: String!, email: String! password: String!): Auth
 addOrder(products: [ID]!): Order
 login(email: String!, password: String!): Auth
 sellProduct(_id: ID!, quantity: Int!): Products
+addProduct(category: ID!): Category
 }
 
 `;

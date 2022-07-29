@@ -21,7 +21,8 @@ user {
 `;
 export const GET_ALL_PRODUCTS = gql`
 query allProducts {
-    products {
+    allproducts {
+        _id
         name
         description
         images
@@ -41,3 +42,36 @@ export const QUERY_CHECKOUT = gql`
     }
   }
 `;
+
+export const GET_SINGLE_PRODUCT = gql`
+query product($id: ID!) {
+    product(_id: $id) {
+        _id
+        name
+        description
+        images
+        price
+        category {
+            _id
+            name
+        }
+    }
+  }
+`;
+
+
+export const GET_SINGLE_CATEGORY = gql`
+query Categories {
+    categories {
+      _id
+      name
+      products {
+        _id
+         name
+        images
+        price
+      }
+    }
+  }
+`
+

@@ -14,7 +14,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-// import SingleProduct from './pages/SingleProduct'
+import ProductPage from './pages/ProductPage'
 import AllCategories from './pages/AllCategories';
 import CategoryPage from './pages/CategoryPage';
 
@@ -56,8 +56,11 @@ function App() {
         <Routes>
           <Route 
             path='/' 
-            // element={<SingleProduct />} 
             element={<AllCategories />} 
+            />
+          <Route 
+            path='/product/:productId' 
+            element={<ProductPage />} 
           />
           <Route 
             path='/login' 
@@ -68,12 +71,12 @@ function App() {
             element={<Signup />} 
           />
           <Route 
-            path='*'
-            element={<h1 className='display-2'>Wrong page!</h1>}
-          />
-          <Route 
           path='/categories'
           element={<CategoryPage />}
+          />
+          <Route 
+            path='*'
+            element={<h1 className='display-2'>Wrong page!</h1>}
           />
         </Routes>
         <Footer />

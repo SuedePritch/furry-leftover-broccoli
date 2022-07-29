@@ -25,10 +25,31 @@ const resolvers = {
       return await Category.find().populate('products');
     },
 
+    //Single Category
+    catergory: async (parent, { _id }) => {
+      return await Category.findById(_id).populate('product')
+    },
+
 
     //All Products
-    products: async () => {
-      return await Products.find();
+    allproducts:async (parent) =>{
+      return await Products.find({})
+    },
+
+    //products by category or name
+    products: async (parent, {category, name}) => {
+      const params = {};
+
+      if(category) {
+        params.category = category;
+      }
+
+      if (name) {
+        params.name = {
+          $regex: name
+        };
+      }
+      return await Products.find(params).populate('category');
     },
       
 
