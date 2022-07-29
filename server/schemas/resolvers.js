@@ -219,32 +219,34 @@ const resolvers = {
 
     //update price
     updatePrice: async ( parent, {_id, price}) => {
-
+      const newPrice = Math.abs(price)
+      return await Products.findByIdAndUpdate(_id, { $set: { price: newPrice}}, {new: true});
     },
 
     //update cost
     updateCost: async ( parent, {_id, cost}) => {
-
+      const newCost = Math.abs(cost)
+      return await Products.findByIdAndUpdate(_id, { $set: { price: newCost}}, {new: true});
     },
 
     //update description
     updateDescription: async ( parent, { _id, description }) => {
-
+      return await Products.findByIdAndUpdate( _id, { $set: {description: description}}, {new: true})
     },
 
     //update name
     updateName: async ( parent, { _id, name }) => {
-
+      return await Products.findByIdAndUpdate( _id, { $set: {name: name}}, {new: true})
     },
 
     // update product's category
     updateCategory: async ( parent, { _id, category}) => {
-
+      return await Products.findByIdAndUpdate( _id, { $set: {category: category }}, {new: true})
     },
 
     //delete product
     deleteProduct: async (parent, { _id }) => {
-
+      return await Products.findByIdAndDelete( _id );
     },
 
 
