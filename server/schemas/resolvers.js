@@ -20,7 +20,7 @@ const resolvers = {
     },
 
 
-    //All Categories
+    //All Products by Category
     categories: async () => {
       return await Category.find().populate('products');
     },

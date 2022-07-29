@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const { OrderInc } = require('.');
 const { Schema } = mongoose;
 
-const orderIncSchema = new Schema({
+const adminAddInventorySchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
@@ -19,6 +18,6 @@ const orderIncSchema = new Schema({
     }
 })
 
-const OrderInc = mongoose.model('OrderInc', orderIncSchema);
+const AdminAddInventory = mongoose.model('AdminAddInventory', adminAddInventorySchema);
 
-module.exports = OrderInc;
+module.exports = AdminAddInventory;
