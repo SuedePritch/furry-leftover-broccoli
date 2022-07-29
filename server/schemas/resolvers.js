@@ -1,4 +1,4 @@
-const { User, Store, Category, Order, Products } = require('../models');
+const { User, Store, Category, Order, Products, AdminAddInventory } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
@@ -131,6 +131,19 @@ const resolvers = {
       });
 
       return { session: session.id };  
+    },
+
+
+    //INVENTORY
+    //GET ALL DELIVERY ORDERS
+
+    getAllAdminInventory: async () => {
+      return await AdminAddInventory.find().populate('products');
+    },
+
+    //GET ONE DELIVERY ORDER
+    getOneAdminInventory: async () => {
+      return await AdminAddInventory.findById(_id).populate('products');
     }
     
   },
@@ -188,12 +201,97 @@ const resolvers = {
       return await Products.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true});
     },
 
+    //ADMIN
+
+    //PRODUCTS
+
+    //adds 1 to the quantity
+    addQuantity: async ( parent, {_id, quantity}) => {
+      const add = Math.abs(quantity)* 1;
+      return await Products.findByIdAndUpdate(_id, { $inc: { quantity: add}}, {new: true});
+    },
+
+    //removes 1 from quantity
+    removeQuantity: async ( parent, {_id, quantity}) => {
+      const remove = Math.abs(quantity)* 1;
+      return await Products.findByIdAndUpdate(_id, { $inc: { quantity: -remove}}, {new: true});
+    },
+
+    //update price
+    updatePrice: async ( parent, {_id, price}) => {
+
+    },
+
+    //update cost
+    updateCost: async ( parent, {_id, cost}) => {
+
+    },
+
+    //update description
+    updateDescription: async ( parent, { _id, description }) => {
+
+    },
+
+    //update name
+    updateName: async ( parent, { _id, name }) => {
+
+    },
+
+    // update product's category
+    updateCategory: async ( parent, { _id, category}) => {
+
+    },
+
+    //delete product
+    deleteProduct: async (parent, { _id }) => {
+
+    },
+
+
+    //CATEGORY
+
+    //create category
+    createCategory: async (parent, { store }) => {
+
+    },
+
+    //add product to category
+    addProduct: async (parent, { _id, products }) => {
+
+    },
+
+    //remove product from category
+    removeProduct: async ( parent, { _id, products }) => {
+
+    },
+
+    createProduct: async( parent, { _id, products }) => {
+
+    },
+
+
+  //ADDINVENTORY
+
+  // update a delivery
+  updateProductDelivery: async ( parent, { _id,  products }) => {
+
+  },
+
+  //add product to delivery
+  addProductDelivery: async ( parent, { _id, products }) => {
+
+  },
+
+  //set delivery date
+  setDeliveryDate: async ( parent, { _id, deliveryDate }) => {
+
+  },
+
+  //delete a delivery
+  deleteDelivery: async ( parent, { _id }) => {
+
+  },
     },
 };
-
-
-
-
-
 
 module.exports = resolvers;
