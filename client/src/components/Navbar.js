@@ -18,6 +18,7 @@ return (
         <li><Link to="/">Tech</Link></li>
         <li><Link to="/">BBQ</Link></li>
         <li><Link to="/">Tools</Link></li> */}
+         <li><Link to="/categories">Clothes</Link></li>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup">Signup</Link></li>
         

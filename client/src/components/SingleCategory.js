@@ -1,39 +1,40 @@
 // import '../styles/Category.css';
+import '../styles/AllCategories.css';
+
 import { GET_SINGLE_CATEGORY } from '../utils/queries';
 import { useQuery } from "@apollo/client";
+// import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
+const url = "/categories/" 
 
 const SingleCategory = () => {
-// call the query for category/product
+// call the query for category/cat
     let category;
-    const { loading, error, data } = useQuery(GET_SINGLE_CATEGORY);
+    // const { categoryId } = useParams;
+  const { loading, error, data } = useQuery(GET_SINGLE_CATEGORY, {variables: {id:"62e18b19df691851404f8b61"}});
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
     if(!loading && !error){
-      category = data.categories
+      category = data.category.products
     }
-    console.log(category)
+    console.log(category[0])
 
     return(
-        <div>
-          <div>
-               <h2>{category.name}</h2>
-               </div>
-               {category.map((product) => (
-               
-            //    <ul>
-            //        <li key={products.id}>
-                   <div>
-                       <div>
-                           <h3>{[product.name]}</h3>
-                           <div className='image'>{[product.image]}</div>
-                           <p>${product.price}</p>
-                       </div>
-                       </div>
-        //                </li>
-        // </ul>
-               ))}
-         
-       
+        <div className="product-container">
+        {category.map((products) => {
+            const linkaddress = url.concat(products._id);
+            return(
+              <Link to={linkaddress} className="product" key={products._id}>
+                        <img src={products.images} alt="alternate"/>
+                        <div className="details">
+                            <h2 className='product-name'>{products.name}</h2>
+                            <p className='price'>{products.price}</p>
+                        </div>
+                            <button className='add-to-cart-btn'>Add to Cart</button>
+                    </Link>
+        )
+        })} 
         </div>
     )
 }

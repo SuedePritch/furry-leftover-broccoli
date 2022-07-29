@@ -56,7 +56,7 @@ type Query {
     stores: [Store]
     store(_id: ID!): Store
     categories: [Category]
-    catergory(_id: ID!): Category
+    category(_id: ID!): Category
     allproducts: [Products]
     products: [Products]
     product(_id: ID!): Products

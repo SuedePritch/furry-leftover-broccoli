@@ -52,15 +52,14 @@ query product($id: ID!) {
 
 
 export const GET_SINGLE_CATEGORY = gql`
-query Categories {
-    categories {
-      _id
+query Category($id: ID!) {
+    category(_id: $id) {
       name
-      products {
+      products  {
         _id
-         name
-        images
+        name
         price
+        images
       }
     }
   }
