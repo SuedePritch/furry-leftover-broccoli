@@ -52,26 +52,62 @@ type Auth {
     user: User
 }
 
+
+
+
+
+
+
+
 type Query {
+
+    #STORES
     stores: [Store]
     store(_id: ID!): Store
+
+
+    # CATEGORIES
     categories: [Category]
     catergory(_id: ID!): Category
+
+
+    # PRODUCTS
     allproducts: [Products]
     products: [Products]
     product(_id: ID!): Products
+
+    # USERS
     user: User
+
+
+    # ORDER & INVENTORY
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
     
 }
 
+
+
+
+
+
+
+
+
 type Mutation {
-addUser(username: String!, email: String! password: String!): Auth
-addOrder(products: [ID]!): Order
-login(email: String!, password: String!): Auth
-sellProduct(_id: ID!, quantity: Int!): Products
-addProduct(category: ID!): Category
+    # USER
+    addUser(username: String!, email: String! password: String!): Auth
+    login(email: String!, password: String!): Auth
+
+
+    # ORDERS & INVENTORY
+    addOrder(products: [ID]!): Order
+    sellProduct(_id: ID!, quantity: Int!): Products
+
+    # ADMIN
+    addProduct(category: ID!): Category
+
+
 }
 
 `;

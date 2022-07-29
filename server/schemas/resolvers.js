@@ -7,18 +7,23 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
+    //STORE
 
     // All Stores
     stores: async () => {
       return await Store.find().populate('category').populate('adminId');
     },
 
-
     //Single Store
     store: async (parent, { _id }, context) => {
       return await Store.findById(_id).populate('category').populate('adminId')
     },
 
+
+
+
+
+    //CATEGORY
 
     //All Categories
     categories: async () => {
@@ -31,19 +36,28 @@ const resolvers = {
     },
 
 
+
+
+
+
+    //PRODUCTS
     //All Products
     allproducts:async (parent) =>{
       return await Products.find({})
     },
 
-    //products by category or name
+     //Single Product
+      product: async (parent, { _id }) => {
+      return await Products.findById({_id});
+    },
+
+    //Products by Category or Name
+    //products is a lousy name for this but here we are
     products: async (parent, {category, name}) => {
       const params = {};
-
       if(category) {
         params.category = category;
       }
-
       if (name) {
         params.name = {
           $regex: name
@@ -53,12 +67,11 @@ const resolvers = {
     },
       
 
-    //Single Product
-    product: async (parent, { _id }) => {
-      return await Products.findById({_id});
-    },
 
 
+
+
+    //USER
     //Single User
     user: async (parent, { _id }, context)=> {  
       if (context.user) {
@@ -69,7 +82,13 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in! resolvers');
   
     },
-    //cart for that user
+
+
+
+
+
+    //SHOPPING CART & STRIPE
+    //Cart for user
     order: async (parent, { _id }, context) => {
       const user = await User.findById(
         {_id: context.user._id}
@@ -77,7 +96,6 @@ const resolvers = {
 
       return user.orders.id(_id);
     },
-    //
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products});
@@ -123,7 +141,7 @@ const resolvers = {
 
 
   Mutation: {
-
+    //USER
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
@@ -149,6 +167,11 @@ const resolvers = {
       return { token, user };
     },
 
+
+
+
+
+    //ORDERS AND INVENTORY
     addOrder: async (parent, { products }, context) => {
       if(context.user) {
         const order = new Order({ products });
@@ -167,5 +190,10 @@ const resolvers = {
 
     },
 };
+
+
+
+
+
 
 module.exports = resolvers;
