@@ -31,7 +31,7 @@ type Order {
     purchaseDate: String
     products: [Products]
 }
-type OrderInc {
+type Delivery {
     _id: ID
     createdAt: {
         type: String
@@ -92,8 +92,8 @@ type Query {
     # ORDER & INVENTORY
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    findAll-adminAddInventory: [AdminAddInventory]
-    findOne-adminAddInventory: (_id: ID!): AdminAddInventory
+    findAll-Delivery: [Delivery]
+    findOne-Delivery: (_id: ID!): Delivery
     
 }
 
@@ -136,10 +136,10 @@ type Mutation {
 
     ##ADDINVENTORY
 
-    adminUpdateAddInventory(_id: ID!, products: String!): AdminAddInventory
-    adminAddProductAddInventory(_id: ID!, products: String!): AdminAddInventory
-    adminSetDeliveryDate(_id: ID!, deliveryDate: String!): AdminAddInventory
-    adminDeleteAddInventory(_id: ID!): AdminAddInventory
+    adminUpdateDelivery(_id: ID!, products: String!): Delivery
+    adminAddProductDelivery(_id: ID!, products: String!): Delivery
+    adminSetDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
+    adminDeleteDelivery(_id: ID!): Delivery
 
 
 }
