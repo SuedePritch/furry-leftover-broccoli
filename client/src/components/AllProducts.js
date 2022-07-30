@@ -20,17 +20,16 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
     }
     return(
         <div className="product-container">
-        {productList.map((product) => {
+        {productList.slice(0,15).map((product) => {
             const linkaddress = url.concat(product._id)
             return  <Link to={linkaddress} className="product" key={product._id}>
                         <img src={product.images[0]} alt="alternate"/>
                         <div className="details">
                             <h2 className='product-name'>{product.name}</h2>
-                            <p className='price'>{product.price}</p>
+                            <p className='price'>${product.price}</p>
                         </div>
                             <button className='add-to-cart-btn'>Add to Cart</button>
                     </Link>
-        
         })} 
         </div>
     )

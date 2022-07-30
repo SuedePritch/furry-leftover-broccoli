@@ -1,9 +1,14 @@
 .category-container{
-    display: flex;
-    justify-content: space-evenly;
-    /* z-index: 2; */
+    margin:2rem;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    text-align: center;
 }
-
+.category{
+    text-decoration: none;
+    font-size: 0.75em;
+    color: var(--clr-primary-200);
+}
 
 
 

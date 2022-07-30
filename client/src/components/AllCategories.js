@@ -12,8 +12,8 @@ const url = "/category/"
 const AllCategories = () => {
     let category;
     
-  const { loading, error, data } = useQuery(GET_ALL_CATEGORIES);
-    if (loading) return 'Loading...';
+  const { loading, error, data } = useQuery(GET_ALL_CATEGORIES, {pollInterval:100});
+    if (loading) return '';
     if (error) return `Error! ${error.message}`;
     if(!loading && !error){
       category = data.categories

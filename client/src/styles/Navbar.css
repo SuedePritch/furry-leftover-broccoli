@@ -8,6 +8,12 @@
     padding:1rem 1.5rem;
     border-bottom: 14px solid var(--clr-primary-200);
 }
+.logo-title{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color:var(--clr-primary-200)
+}
 h1{
     font-size: 3.5em;
 }
