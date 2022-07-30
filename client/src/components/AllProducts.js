@@ -16,6 +16,7 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
     if(!loading && !error){
+        console.log(data)
     productList = data.allproducts
     }
     return(
