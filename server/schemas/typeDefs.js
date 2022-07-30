@@ -33,11 +33,9 @@ type Order {
 }
 type Delivery {
     _id: ID
-    createdAt: {
-        type: String
-        products: [Products]
-        deliveryDate: String
-    }
+    createdAt: String
+    products: [Products]
+    deliveryDate: String
 }
 
 type User {
@@ -89,11 +87,13 @@ type Query {
     user: User
 
 
+
+
     # ORDER & INVENTORY
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
-    findAll-Delivery: [Delivery]
-    findOne-Delivery: (_id: ID!): Delivery
+    findAllDelivery: [Delivery]
+    findOneDelivery (_id: ID!): Delivery
     
 }
 
@@ -117,29 +117,31 @@ type Mutation {
 
     # ADMIN
 
-    ##PRODUCTS
+    #PRODUCTS
 
-    adminUpdateQuantity(_id: ID!, quantity: Int!): Products
-    adminUpdateParStock(_id: ID!, parStock: Int!): Products
-    adminUpdatePrice(_id: ID!, price: Int!): Products
-    adminUpdateCost(_id: ID!, cost: Int!): Products
-    adminUpdateDescription(_id: ID!, description: String!): Products
-    adminUpdateName(_id: ID!, name: String!): Products
-    adminUpdateProductCategory(_id: ID!, category: [ID]!): Products
-    adminDeleteProduct(_id: ID!): Products
+    addQuantity(_id: ID!, quantity: Int!): Products
+    removeQuantity(_id: ID!, quantity: Int!): Products
+    updatePrice(_id: ID!, price: Float!): Products
+    updateCost(_id: ID!, cost: Float!): Products
+    updateDescription(_id: ID!, description: String!): Products
+    updateName(_id: ID!, name: String!): Products
+    updateCategory(_id: ID!, category: [ID]!): Products
+    deleteProduct(_id: ID!): Products      
 
-    ##CATEGORY
 
-    adminCreateCategory(store: [ID]!): Store
-    adminAddRemoveProductFromCategory(_id: ID!, products: [ID]!): Category
-    adminCreateProduct(name: String!, description: String!, images: [String], price: Int!, cost: Int!, parStock: Int!, quantity: Int!, category: [ID]! ): Category
+    #CATEGORY
+
+    createCategory(name: String!, products: [ID]): Category
+    addProduct(_id: ID!, products: [ID]!): Category
+    removeProduct(_id: ID!, products: [ID]!): Category
+    createProduct(name: String!, description: String!, images: [String], price: Float!, cost: Float!, parStock: Int!, quantity: Int!, category: [ID]! ): Category
 
     ##ADDINVENTORY
 
-    adminUpdateDelivery(_id: ID!, products: String!): Delivery
-    adminAddProductDelivery(_id: ID!, products: String!): Delivery
-    adminSetDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
-    adminDeleteDelivery(_id: ID!): Delivery
+    updateProductDelivery(_id: ID!, products: String!): Delivery
+    addProductDelivery(_id: ID!, products: String!): Delivery
+    setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
+    deleteDelivery(_id: ID!): Delivery
 
 
 }

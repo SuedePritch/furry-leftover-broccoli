@@ -1,4 +1,4 @@
-const { User, Store, Category, Order, Products, AdminAddInventory } = require('../models');
+const { User, Store, Category, Order, Products, AdminAddInventory, Delivery } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
@@ -89,6 +89,8 @@ const resolvers = {
 
     //SHOPPING CART & STRIPE
     //Cart for user
+
+
     order: async (parent, { _id }, context) => {
       const user = await User.findById(
         {_id: context.user._id}
@@ -137,13 +139,13 @@ const resolvers = {
     //INVENTORY
     //GET ALL DELIVERY ORDERS
 
-    getAllAdminInventory: async () => {
-      return await AdminAddInventory.find().populate('products');
+    findAllDelivery: async (parent, { _id }) => {
+      return await Delivery.find().populate('products');
     },
 
-    //GET ONE DELIVERY ORDER
-    getOneAdminInventory: async () => {
-      return await AdminAddInventory.findById(_id).populate('products');
+    // GET ONE DELIVERY ORDER
+    findOneDelivery: async (parent, { _id }) => {
+      return await Delivery.findById(_id).populate('products');
     }
     
   },
@@ -253,45 +255,47 @@ const resolvers = {
     //CATEGORY
 
     //create category
-    createCategory: async (parent, { store }) => {
-
+    createCategory: async (parent, args) => {
+      return await Category.create(args);
     },
 
     //add product to category
     addProduct: async (parent, { _id, products }) => {
-
+      return await Category.findByIdAndUpdate(_id, { $addToSet: {products: products}}, {new: true})
     },
 
     //remove product from category
     removeProduct: async ( parent, { _id, products }) => {
-
+      const productId = products._id;
+      return await Category.findByIdAndUpdate(_id, {$pull: {products: {productId}}}, {new: true})
     },
 
     createProduct: async( parent, { _id, products }) => {
-
+      const newProduct = await Products.create();
+      return await Category.findByIdAndUpdate(_id, {$addtoset: {products: newProduct}}, {new: true})
     },
 
 
-  //ADDINVENTORY
+  // ADDINVENTORY
 
   // update a delivery
   updateProductDelivery: async ( parent, { _id,  products }) => {
-
+    return await Delivery.findByIdAndUpdate( _id, { $set: { products: products }}, {new: true})
   },
 
   //add product to delivery
   addProductDelivery: async ( parent, { _id, products }) => {
-
+    return await Delivery.findByIdAndUpdate( _id, { $addToSet: { products: products}}, {new: true})
   },
 
   //set delivery date
   setDeliveryDate: async ( parent, { _id, deliveryDate }) => {
-
+    return await Delivery.findByIdAndUpdate(_id, { $set: {deliveryDate: deliveryDate}}, {new: true})
   },
 
   //delete a delivery
   deleteDelivery: async ( parent, { _id }) => {
-
+    return await Delivery.findByIdAndDelete( _id );
   },
     },
 };
