@@ -1,8 +1,12 @@
 .admin-nav-container{
+    z-index: -1;
+    position:fixed;
+    top:0;
+    padding-top:10vh;
     display: flex;
     flex-direction: column;
     width:50px;
-    height:90vh;
+    height:100vh;
     background: var(--clr-primary-600);
 }
 
@@ -14,13 +18,8 @@
 }
 
 .content-section{
-    margin:2rem;
-    position: absolute;
-    top:10vh;
-    left: 50px;
-    height:calc(90vh - 4rem);
-    width: calc(100vw - 50px - 4rem);
-    background: var(--clr-primary-800);
+    margin-left:50px;
+    z-index: -2;
 }
 
 .active{

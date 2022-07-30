@@ -4,7 +4,11 @@
   --clr-primary-400: hsl(33, 100%, 30%);
   --clr-primary-300: hsl(33, 67%, 40%);
   --clr-primary-600: hsl(33, 47%, 60%);
+  --clr-primary-700: hsl(33, 37%, 88%);
   --clr-primary-800: hsl(33, 77%, 88%);
+  --clr-darkhue:hsla(33,60%,60%,0.3);
+  --clr-darkerhue:hsla(33,60%,60%,0.4);
+  --clr-darkesthue:hsla(33,60%,30%,0.8);
   
 
   
@@ -22,6 +26,7 @@ body{
 h1{
   font-family: 'Seagram';
 }
+Link,
 Link:visited,
 Link:active{
   color: var(--clr-primary-200);

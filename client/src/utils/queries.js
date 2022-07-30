@@ -34,6 +34,18 @@ query allProducts {
     }
 }
 `;
+export const GET_ALL_PRODUCTS_ADMIN = gql`
+query allProducts {
+    allproducts {
+      _id
+      name
+      price
+      cost
+      parStock
+      quantity
+    }
+}
+`;
 
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
