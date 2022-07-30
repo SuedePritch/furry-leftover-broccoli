@@ -31,6 +31,12 @@ type Order {
     purchaseDate: String
     products: [Products]
 }
+type Delivery {
+    _id: ID
+    createdAt: String
+    products: [Products]
+    deliveryDate: String
+}
 
 type User {
     _id: ID
@@ -82,9 +88,13 @@ type Query {
     user: User
 
 
+
+
     # ORDER & INVENTORY
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
+    findAllDelivery: [Delivery]
+    findOneDelivery (_id: ID!): Delivery
     
 }
 
@@ -107,7 +117,32 @@ type Mutation {
     sellProduct(_id: ID!, quantity: Int!): Products
 
     # ADMIN
-    addProduct(category: ID!): Category
+
+    #PRODUCTS
+
+    addQuantity(_id: ID!, quantity: Int!): Products
+    removeQuantity(_id: ID!, quantity: Int!): Products
+    updatePrice(_id: ID!, price: Float!): Products
+    updateCost(_id: ID!, cost: Float!): Products
+    updateDescription(_id: ID!, description: String!): Products
+    updateName(_id: ID!, name: String!): Products
+    updateCategory(_id: ID!, category: [ID]!): Products
+    deleteProduct(_id: ID!): Products      
+
+
+    #CATEGORY
+
+    createCategory(name: String!, products: [ID]): Category
+    addProduct(_id: ID!, products: [ID]!): Category
+    removeProduct(_id: ID!, products: [ID]!): Category
+    createProduct(name: String!, description: String!, images: [String], price: Float!, cost: Float!, parStock: Int!, quantity: Int!, category: [ID]! ): Category
+
+    ##ADDINVENTORY
+
+    updateProductDelivery(_id: ID!, products: String!): Delivery
+    addProductDelivery(_id: ID!, products: String!): Delivery
+    setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
+    deleteDelivery(_id: ID!): Delivery
 
 
 }
