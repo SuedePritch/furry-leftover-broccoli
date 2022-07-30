@@ -17,8 +17,12 @@
 }
 body{
   background-color: var(--clr-primary-400);
-  color: var(--clr-primary-800) 
+  color: var(--clr-primary-200) 
 }
 h1{
   font-family: 'Seagram';
+}
+Link:visited,
+Link:active{
+  color: var(--clr-primary-200);
 }

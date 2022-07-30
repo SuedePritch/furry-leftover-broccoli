@@ -1,0 +1,28 @@
+.admin-nav-container{
+    display: flex;
+    flex-direction: column;
+    width:50px;
+    height:90vh;
+    background: var(--clr-primary-600);
+}
+
+.admin-icon{
+    margin-top:10px;
+    padding:0;
+    border:none;
+    background: none;
+}
+
+.content-section{
+    margin:2rem;
+    position: absolute;
+    top:10vh;
+    left: 50px;
+    height:calc(90vh - 4rem);
+    width: calc(100vw - 50px - 4rem);
+    background: var(--clr-primary-800);
+}
+
+.active{
+    box-shadow:0 0 6px 6px var(--clr-primary-800);
+}

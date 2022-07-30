@@ -15,6 +15,7 @@ import Signup from './pages/Signup'
 import ProductPage from './pages/ProductPage'
 import AllCategories from './pages/AllCategories';
 import CategoryPage from './pages/CategoryPage';
+import AdminMain from './pages/AdminMain';
 
 
 require('dotenv').config();
@@ -40,6 +41,10 @@ function App() {
           {/* Auth Routes */}
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
+
+          {/* Admin Routes */}
+          <Route path='/admin' element={<AdminMain />} />
+
 
 
           {/* Main Landing Page */}

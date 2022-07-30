@@ -1,6 +1,7 @@
 // navbar css file
 import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
+import Logo from './Logo'
 
 const Navbar = (props) =>{
     // function pageChange(event){
@@ -10,15 +11,12 @@ const Navbar = (props) =>{
 
 return (
     <div className='navbar-container'>
-        <h1>Inventory Management</h1>
+        <Link to="/" className="logo-title">
+            <Logo/>
+            <h1>1nv3nt0ry</h1>
+        </Link>
         
   <ul>
-        {/* <li><Link to="/">Categories</Link></li>
-        <li><Link to="/categories">Clothes</Link></li>
-        <li><Link to="/">Tech</Link></li>
-        <li><Link to="/">BBQ</Link></li>
-        <li><Link to="/">Tools</Link></li> */}
-         <li><Link to="/categories">Clothes</Link></li>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup">Signup</Link></li>
         
