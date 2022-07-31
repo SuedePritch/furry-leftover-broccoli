@@ -4,9 +4,8 @@ import { useQuery } from '@apollo/client';
 
 import '../styles/AdminProducts.css'
 function AdminProducts() {
-  // Display all products
-// iterates over the list of products and creates a link to the single product page
-//shows image, name, price, and add to cart button
+// Display all products in spreadsheet format
+//shows name price cost parStock quantity delete/add buttons
 let productList;
 const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
     if (loading) return 'Loading...';
