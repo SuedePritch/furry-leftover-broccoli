@@ -1,0 +1,14 @@
+.admin-category{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:1rem;
+    margin:1rem;
+}
+.productId-List{
+    padding:1rem;
+    border: 2px solid black;
+    max-height: 40vh;
+    overflow: hidden;
+    overflow-y: scroll;
+
+}

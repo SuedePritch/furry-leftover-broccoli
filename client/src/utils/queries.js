@@ -85,6 +85,18 @@ query Categories {
   }
 }
 `
+export const GET_ALL_CATEGORIES_ADMIN = gql`
+query Categories {
+  categories {
+    _id
+    name
+    products {
+      _id
+      name
+    }
+  }
+}
+`
 export const GET_SINGLE_CATEGORY = gql`
 query Category($id: ID!) {
     category(_id: $id) {

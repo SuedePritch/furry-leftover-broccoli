@@ -17,6 +17,7 @@ return (
         </Link>
         
   <ul>
+        <li><Link to="/admin">ADMIN</Link></li>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup">Signup</Link></li>
         
