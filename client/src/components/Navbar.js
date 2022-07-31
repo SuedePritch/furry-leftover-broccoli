@@ -2,7 +2,6 @@
 import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
 import Logo from './Logo'
-import Cart from './Cart'
 
 const Navbar = (props) =>{
     // function pageChange(event){
@@ -20,7 +19,7 @@ return (
   <ul>
         <li><Link to="/login">Login</Link></li>
         <li><Link to="/signup">Signup</Link></li>
-        <Cart />
+        
         
   </ul>
       

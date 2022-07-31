@@ -7,7 +7,6 @@ import Auth from '../utils/auth.js';
 import '../styles/Signup.css';
 
 const Signup = () =>{
-    
     // BUILD MUTATION FOR LOGIN_USER
     const [addUser] = useMutation(ADD_USER);
     const [signupFormData, setSignupFormData] = useState({ email: '', password: ''});

@@ -24,9 +24,7 @@ const LoginForm = () => {
         }
     };
 
-   
-
-    const handleChange = (event) => {
+       const handleChange = (event) => {
         const { name, value } = event.target;
         setUserFormData({
             ...userFormData,
