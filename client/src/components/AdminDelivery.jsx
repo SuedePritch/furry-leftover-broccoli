@@ -1,17 +1,35 @@
 import React, {useState} from 'react'
 import { GET_ALL_PRODUCTS_ADMIN } from '../utils/queries';
-import { useQuery } from '@apollo/client';
+import { CREATE_DELIVERY } from '../utils/mutations';
+import { useQuery, useMutation } from '@apollo/client';
 import '../styles/AdminDelivery.css'
 import AdminDeliveryList from './AdminDeliveryList';
 function AdminDelivery() {
   
   const [requestPreview, setRequestPreview] = useState([]) 
+  const [createDelivery] = useMutation(CREATE_DELIVERY)
+  
+  const handleDeliveryCreation = async (event) =>{
+    try{
+      const creatingANewDelivery = await createDelivery({
+        variables: { products: productIdListForDelivery},
+      });
+      console.log(creatingANewDelivery)
+      setRequestPreview([])
+    } catch (e) {
+      console.log(e);
+  }
+  }
 
-  // useEffect(() => {
+  
+  
+  
+  let productIdListForDelivery = []
+      requestPreview.map((productIds)=>{
+      productIdListForDelivery.push(productIds._id)
+      return productIdListForDelivery
+    })
 
-  //   console.log(requestPreview)
-    
-  // },[requestPreview]);
 
 
   const handleAddToDelivery = (event) =>{
@@ -26,9 +44,27 @@ function AdminDelivery() {
       "parStock": productClicked.parstock,
       "quantity": productClicked.quantity,
     }
+
+ 
+
+    //checks current array to make sure we dont add duplicates
+    //this throws error about react keys in a map
+    //better ux anyways
     let deliveryArray = requestPreview
+    for (let i = 0; i < deliveryArray.length; i++) {
+      const deliveryNoDubplicates = deliveryArray[i]._id;
+      
+      if(productClickedObj._id.includes(deliveryNoDubplicates)){
+        console.log('Already In Delivery')
+        return
+      }
+    }
+
+    //updates delivery array and sets it to the reviewPreview 
+    //reviewPreview is passed as props into AdminDeliveryList
     deliveryArray.push(productClickedObj)
     setRequestPreview([...deliveryArray])
+    
 
     
   }
@@ -37,14 +73,9 @@ function AdminDelivery() {
 
 
 
-
-
-
-
-
   
 // Display all products in spreadsheet format
-//shows name price cost parStock quantity delete/add buttons
+//shows id cost parStock quantity add to delivery buttons
 let productList;
 const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
     if (loading) return 'Loading...';
@@ -55,9 +86,9 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
     return(
 
       <div className='container'>
-        
         {/* Spreadsheet Labels */}
           <div className="admin-delivery">
+            <h3>Inventory List</h3>
             <div className="admin-delivery-list">
               <h3 className="admin-delivery-item admin-delivery-item-label">Id</h3>
               <h3 className="admin-delivery-item admin-delivery-item-label">Cost</h3>
@@ -89,6 +120,8 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
           </div>
             {/* Spreadsheet Labels */}
             <div className="admin-delivery">
+            <h3>Delivery Preview<button className='admin-delivery-item' onClick={handleDeliveryCreation}>Create</button></h3>
+            
               <div className="admin-delivery-list">
                 <h3 className="admin-delivery-item admin-delivery-item-label">Id</h3>
                 <h3 className="admin-delivery-item admin-delivery-item-label">Cost</h3>
