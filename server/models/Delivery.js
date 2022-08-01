@@ -13,8 +13,7 @@ const deliverySchema = new Schema({
         }
     ],
     deliveryDate: {
-        type: Date,
-        default: ((Date.now)+  86400000*1)
+        type: Date
     }
 })
 

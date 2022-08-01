@@ -228,7 +228,7 @@ const resolvers = {
     //update cost
     updateCost: async ( parent, {_id, cost}) => {
       const newCost = Math.abs(cost)
-      return await Products.findByIdAndUpdate(_id, { $set: { price: newCost}}, {new: true});
+      return await Products.findByIdAndUpdate(_id, { $set: { cost: newCost}}, {new: true});
     },
 
     //update description
@@ -248,7 +248,19 @@ const resolvers = {
 
     //delete product
     deleteProduct: async (parent, { _id }) => {
+
       return await Products.findByIdAndDelete( _id );
+    },
+    updateProductRow: async (parent, {_id, quantity, cost, price, description, name, category, parStock}) => {
+      return await Products.findByIdAndUpdate( _id, { $set: {
+        name: name, 
+        description: description, 
+        price: price, 
+        cost:cost, 
+        parStock: parStock, 
+        quantity: quantity, 
+        category: category
+      }}, { new: true});
     },
 
 
@@ -260,19 +272,22 @@ const resolvers = {
     },
 
     //add product to category
-    addProduct: async (parent, { _id, products }) => {
+    addProductToCat: async (parent, { _id, products }) => {
       return await Category.findByIdAndUpdate(_id, { $addToSet: {products: products}}, {new: true})
     },
 
     //remove product from category
-    removeProduct: async ( parent, { _id, products }) => {
+    removeProductFromCat: async (parent, products) => {
       const productId = products._id;
-      return await Category.findByIdAndUpdate(_id, {$pull: {products: {productId}}}, {new: true})
+      return await Category.findByIdAndUpdate(_id, {$pull: {products: productId}}, {new: true})
     },
 
-    createProduct: async( parent, { _id, products }) => {
-      const newProduct = await Products.create();
-      return await Category.findByIdAndUpdate(_id, {$addtoset: {products: newProduct}}, {new: true})
+    createProductAddToCat: async( parent, products) => {
+      const newProduct = await Products.create(products);
+      return await Category.findByIdAndUpdate(newProduct.category , {$push: {products: newProduct._id}}, {new: true})
+    },
+    createProduct: async(parent, products) => {
+      return await Products.create(products);
     },
 
 
