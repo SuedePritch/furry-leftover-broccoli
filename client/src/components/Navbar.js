@@ -1,7 +1,8 @@
 // navbar css file
 import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
-import Logo from './Logo'
+import logoSimple from '../assets/images/Binoculars.svg'
+
 
 const Navbar = (props) =>{
     // function pageChange(event){
@@ -12,8 +13,8 @@ const Navbar = (props) =>{
 return (
     <div className='navbar-container'>
         <Link to="/" className="logo-title">
-            <Logo/>
-            <h1>1nv3nt0ry</h1>
+            <h1>STOCKER</h1>
+            <img src={logoSimple} alt='logosimple'/>
         </Link>
         
   <ul>

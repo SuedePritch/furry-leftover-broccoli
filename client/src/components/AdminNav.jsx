@@ -1,8 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import '../styles/AdminNav.css'
 
-import Logo from '../components/Logo'
+import logoSimple from '../assets/images/Binoculars.svg'
 import AdminDelivery from './AdminDelivery';
 import AdminProducts from './AdminProducts';
 import AdminCategory from './AdminCategory';
@@ -24,10 +23,8 @@ function AdminNav(props) {
         This is so the navbar stays full height
         There were issues with z-index messing with link functionallity
          */}
-        <div>
-            <Link to="/" className='navbar-padding'>
-                <Logo/>
-            </Link>
+        <div className='navbar-padding'>
+                <img src={logoSimple} alt="logo" />
         </div>
         <div className="admin-nav-container">
         <button 
