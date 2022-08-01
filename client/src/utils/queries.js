@@ -39,10 +39,15 @@ query allProducts {
     allproducts {
       _id
       name
+      description
+      images
       price
       cost
       parStock
       quantity
+      category{
+        _id
+      }
     }
 }
 `;
