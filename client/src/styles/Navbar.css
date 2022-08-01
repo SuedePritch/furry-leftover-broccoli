@@ -5,17 +5,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:1rem 1.5rem;
     border-bottom: 14px solid var(--clr-primary-200);
 }
 .logo-title{
     display: flex;
-    align-items: center;
+    /* flex-direction: row-reverse; */
+    letter-spacing: 0.3em;
     text-decoration: none;
-    color:var(--clr-primary-200)
+    color: var(--clr-primary-200);
 }
+.logo-title >*{
+    padding-left: 2rem;
+}
+
 h1{
-    font-size: 3.5em;
+    font-size: 2em;
 }
 ul{
     display: flex;

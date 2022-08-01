@@ -16,6 +16,7 @@ import ProductPage from './pages/ProductPage'
 import AllCategories from './pages/AllCategories';
 import CategoryPage from './pages/CategoryPage';
 import AdminMain from './pages/AdminMain';
+import Landing from './pages/Landing'
 
 
 require('dotenv').config();
@@ -48,7 +49,8 @@ function App() {
 
 
           {/* Main Landing Page */}
-          <Route path='/' element={<AllCategories />} />
+          <Route path='/' element={<Landing />} />
+          
 
 
           {/* Product Routes */}
@@ -56,6 +58,7 @@ function App() {
 
 
           {/* Category Routes */}
+          <Route path='/category' element={<AllCategories />} />
           <Route path='/category/:categoryId'element={<CategoryPage />}/>
 
 
