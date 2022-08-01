@@ -138,7 +138,7 @@ type Mutation {
     createProduct(name: String!, description: String!, images: [String], price: Float!, cost: Float!, parStock: Int!, quantity: Int!, category: [ID]! ): Category
 
     ##ADDINVENTORY
-
+    createDelivery(products:[ID], createdAt:String, deliveryDate: String):Delivery
     updateProductDelivery(_id: ID!, products: String!): Delivery
     addProductDelivery(_id: ID!, products: String!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery

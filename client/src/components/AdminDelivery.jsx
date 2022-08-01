@@ -23,13 +23,12 @@ function AdminDelivery() {
       "images": productClicked.images,
       "price": productClicked.price,
       "cost": productClicked.cost,
-      "parStock": productClicked.parStock,
+      "parStock": productClicked.parstock,
       "quantity": productClicked.quantity,
     }
     let deliveryArray = requestPreview
     deliveryArray.push(productClickedObj)
     setRequestPreview([...deliveryArray])
-    console.log(requestPreview)
 
     
   }

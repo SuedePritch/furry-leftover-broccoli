@@ -277,6 +277,9 @@ const resolvers = {
 
 
   // ADDINVENTORY
+  createDelivery: async ( parent, args) => {
+    return await Delivery.create(args)
+  },
 
   // update a delivery
   updateProductDelivery: async ( parent, { _id,  products }) => {
