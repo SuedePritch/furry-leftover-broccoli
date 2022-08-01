@@ -24,3 +24,15 @@ export const ADD_USER = gql`
         }
     }
 `
+export const CREATE_DELIVERY = gql`
+    mutation createDelivery($products: [ID]) {
+    createDelivery(products: $products) {
+            products {
+                _id
+            }
+  }
+}
+`
+
+
+    

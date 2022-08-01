@@ -5,7 +5,7 @@ import Logo from '../components/Logo'
 function Landing() {
     setTimeout(() => {
         window.location.assign('/category');
-    }, 5000);
+    }, 2000);
   return (
     <div className='landing-page-container'>
         <div className="landing-page-logo">

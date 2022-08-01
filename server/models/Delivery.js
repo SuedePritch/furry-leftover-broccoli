@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const deliverySchema = new Schema({
     createdAt: {
         type: Date,
-        default: Date.now,
+        default: Date.now(),
     },
     products: [
         {
@@ -13,7 +13,8 @@ const deliverySchema = new Schema({
         }
     ],
     deliveryDate: {
-        type: Date
+        type: Date,
+        default: ((Date.now())+  86400000*1)
     }
 })
 
