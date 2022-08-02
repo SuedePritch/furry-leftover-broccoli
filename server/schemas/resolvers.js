@@ -139,13 +139,17 @@ const resolvers = {
     //INVENTORY
     //GET ALL DELIVERY ORDERS
 
-    findAllDelivery: async (parent, { _id }) => {
-      return await Delivery.find().populate('products');
+    findAllDelivery: async (parent, { _id }, context) => {
+      if(context.user.isAdmin){
+        return await Delivery.find().populate('products');
+      }
     },
 
     // GET ONE DELIVERY ORDER
-    findOneDelivery: async (parent, { _id }) => {
+    findOneDelivery: async (parent, { _id }, context) => {
+      if(context.user.isAdmin){
       return await Delivery.findById(_id).populate('products');
+      }
     }
     
   },
@@ -208,50 +212,66 @@ const resolvers = {
     //PRODUCTS
 
     //adds 1 to the quantity
-    addQuantity: async ( parent, {_id, quantity}) => {
+    addQuantity: async ( parent, {_id, quantity}, context) => {
+      if(context.user.isAdmin){
       const add = Math.abs(quantity)* 1;
       return await Products.findByIdAndUpdate(_id, { $inc: { quantity: add}}, {new: true});
+      }
     },
 
     //removes 1 from quantity
-    removeQuantity: async ( parent, {_id, quantity}) => {
+    removeQuantity: async ( parent, {_id, quantity}, context) => {
+      if(context.user.isAdmin){
       const remove = Math.abs(quantity)* 1;
       return await Products.findByIdAndUpdate(_id, { $inc: { quantity: -remove}}, {new: true});
+      }
     },
 
     //update price
-    updatePrice: async ( parent, {_id, price}) => {
+    updatePrice: async ( parent, {_id, price}, context) => {
+      if(context.user.isAdmin){
       const newPrice = Math.abs(price)
       return await Products.findByIdAndUpdate(_id, { $set: { price: newPrice}}, {new: true});
+      }
     },
 
     //update cost
-    updateCost: async ( parent, {_id, cost}) => {
+    updateCost: async ( parent, {_id, cost}, context) => {
+      if(context.user.isAdmin){
       const newCost = Math.abs(cost)
       return await Products.findByIdAndUpdate(_id, { $set: { cost: newCost}}, {new: true});
+      }
     },
 
     //update description
-    updateDescription: async ( parent, { _id, description }) => {
+    updateDescription: async ( parent, { _id, description }, context) => {
+      if(context.user.isAdmin){
       return await Products.findByIdAndUpdate( _id, { $set: {description: description}}, {new: true})
+      }
     },
 
     //update name
-    updateName: async ( parent, { _id, name }) => {
+    updateName: async ( parent, { _id, name }, context) => {
+      if(context.user.isAdmin){
       return await Products.findByIdAndUpdate( _id, { $set: {name: name}}, {new: true})
+      }
     },
 
     // update product's category
-    updateCategory: async ( parent, { _id, category}) => {
+    updateCategory: async ( parent, { _id, category}, context) => {
+      if(context.user.isAdmin){
       return await Products.findByIdAndUpdate( _id, { $set: {category: category }}, {new: true})
+      }
     },
 
     //delete product
-    deleteProduct: async (parent, { _id }) => {
-
+    deleteProduct: async (parent, { _id }, context) => {
+      if(context.user.isAdmin){
       return await Products.findByIdAndDelete( _id );
+      }
     },
-    updateProductRow: async (parent, {_id, quantity, cost, price, description, name, category, parStock}) => {
+    updateProductRow: async (parent, {_id, quantity, cost, price, description, name, category, parStock}, context) => {
+      if(context.user.isAdmin){
       return await Products.findByIdAndUpdate( _id, { $set: {
         name: name, 
         description: description, 
@@ -261,39 +281,52 @@ const resolvers = {
         quantity: quantity, 
         category: category
       }}, { new: true});
+    }
     },
 
 
     //CATEGORY
 
     //create category
-    createCategory: async (parent, args) => {
+    createCategory: async (parent, args, context) => {
+      if(context.user.isAdmin){
       return await Category.create(args);
+      }
     },
 
     //add product to category
-    addProductToCat: async (parent, { _id, products }) => {
+    addProductToCat: async (parent, { _id, products }, context) => {
+      if(context.user.isAdmin){
       return await Category.findByIdAndUpdate(_id, { $addToSet: {products: products}}, {new: true})
+      }
     },
 
     //remove product from category
-    removeProductFromCat: async (parent, products) => {
+    removeProductFromCat: async (parent, products, context) => {
+      if(context.user.isAdmin){
       const productId = products._id;
       return await Category.findByIdAndUpdate(_id, {$pull: {products: productId}}, {new: true})
+      }
     },
 
-    createProductAddToCat: async( parent, products) => {
+    createProductAddToCat: async( parent, products, context) => {
+      if(context.user.isAdmin){
       const newProduct = await Products.create(products);
       return await Category.findByIdAndUpdate(newProduct.category , {$push: {products: newProduct._id}}, {new: true})
+      }
     },
-    createProduct: async(parent, products) => {
+    createProduct: async(parent, products, context) => {
+      if(context.user.isAdmin){
       return await Products.create(products);
+      }
     },
 
 
   // ADDINVENTORY
-  createDelivery: async ( parent, args) => {
+  createDelivery: async ( parent, args, context) => {
+    if(context.user.isAdmin){
     return await Delivery.create(args)
+    }
   },
 
   // update a delivery
@@ -312,11 +345,15 @@ const resolvers = {
   },
 
   //delete a delivery
-  deleteDelivery: async ( parent, { _id }) => {
+  deleteDelivery: async ( parent, { _id }, context) => {
+    if(context.user.isAdmin){
     return await Delivery.findByIdAndDelete( _id );
+    }
   },
-  removeItemFromDelivery: async ( parent, { _id, products }) => {
+  removeItemFromDelivery: async ( parent, { _id, products }, context) => {
+    if(context.user.isAdmin){
     return await Delivery.findByIdAndUpdate( _id, {$pull: {products: products }}, { new: true})
+    }
   }
     },
 };

@@ -10,7 +10,7 @@ const { loading, error, data } = useQuery(GET_ALL_CATEGORIES_ADMIN);
     if (error) return `Error! ${error.message}`;
     if(!loading && !error){
     categoryList = data.categories
-    console.log(categoryList)
+    // console.log(categoryList)
     }
   return (
     <div  className="admin-category">

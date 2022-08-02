@@ -1,14 +1,33 @@
 // navbar css file
 import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
-import logoSimple from '../assets/images/Binoculars.svg'
+import logoSimple from '../assets/images/Binoculars.svg';
+import jwtdecode from 'jwt-decode';
+import { useState, useEffect } from 'react';
 
 
 const Navbar = (props) =>{
-    // function pageChange(event){
-    //     const id = event.target.id;
-    //     props.setPage(id);
-    // }
+    const [loggedIn, setLoggedIn] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
+    const token = localStorage.getItem('id_token')
+        
+
+        useEffect(() => {
+            if(token){
+                setLoggedIn(true)
+                setIsAdmin(jwtdecode(token).data.isAdmin)
+            }else if(!token){
+                return
+            }
+        }, [loggedIn, isAdmin, token])
+        
+
+
+    const signout = () =>{
+        localStorage.clear()
+        setLoggedIn(false)
+        setIsAdmin(false)
+    }
 
 return (
     <div className='navbar-container'>
@@ -17,13 +36,19 @@ return (
             <img src={logoSimple} alt='logosimple'/>
         </Link>
         
-  <ul>
-        <li><Link to="/admin">ADMIN</Link></li>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/signup">Signup</Link></li>
-        
-        
+<ul>
+    {isAdmin ?
+            <li><Link to="/admin">Admin</Link></li>
+            : <li><Link to="/category">Home</Link></li>
+        }
+
+    {loggedIn ?  <li onClick={signout}>Log Out</li>
+    :
+        <li><Link to="/login">Login</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to="/signup">Signup</Link></li>
+}
   </ul>
+        
+        
       
 
     </div>

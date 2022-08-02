@@ -27,7 +27,7 @@ const SingleProduct = () =>{
             <div className="productItem-details">
                 <h2 className='productItem-name'>{productItem.name}</h2>
                 <p className='productItem-description'>{productItem.description}</p>
-                <p className='productItem-price'>{productItem.price}</p>
+                <p className='productItem-price'>${productItem.price}</p>
                 <button className='productItem-add-to-cart-btn'>Add to Cart</button>
             </div>
           </div>

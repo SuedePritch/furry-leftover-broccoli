@@ -87,3 +87,15 @@ p{
     grid-row: span 4;
     resize: none;
 }
+
+
+
+#checkmark{
+    margin:0;
+    padding:0;
+}
+.received-order-button{
+    margin: 2rem 0;
+    padding:1rem 1.2rem;
+    font-size: 1.3em;
+}
