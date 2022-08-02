@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ProductPage from './pages/ProductPage'
-import AllCategories from './pages/AllCategories';
+import Main from './pages/Main';
 import CategoryPage from './pages/CategoryPage';
 import AdminMain from './pages/AdminMain';
 import Landing from './pages/Landing'
@@ -58,7 +58,7 @@ function App() {
 
 
           {/* Category Routes */}
-          <Route path='/category' element={<AllCategories />} />
+          <Route path='/category' element={<Main />} />
           <Route path='/category/:categoryId'element={<CategoryPage />}/>
 
 
