@@ -38,12 +38,14 @@ function Allproducts(){
   }, [data, loading, dispatch]);
 
   const productslisting = state.products;
+  console.log(productslisting);
 
   return (
     <div >
       <h2>Products:</h2>
       {state.products.length ? (
         <div className="product-container">
+          
           {productslisting.map((product) => (
             <SingleProduct
               key={product._id}
