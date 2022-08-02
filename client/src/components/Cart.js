@@ -47,8 +47,7 @@ const Cart = () => {
       return sum.toFixed(2);
     }
   
-    // When the submit checkout method is invoked, loop through each item in the cart
-    // Add each item id to the productIds array and then invoke the getCheckout query passing an object containing the id for all our products
+
     function submitCheckout() {
       const productIds = [];
   
@@ -84,7 +83,6 @@ const Cart = () => {
             ))} 
               Total: ${calculateTotal()}
   
-              {/* Check to see if the user is logged in. If so render a button to check out */}
               {Auth.loggedIn() ? (
                 <button onClick={submitCheckout}>Checkout</button>
               ) : (
