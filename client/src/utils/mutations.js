@@ -33,6 +33,18 @@ export const CREATE_DELIVERY = gql`
   }
 }
 `
-
+export const UPDATE_PRODUCT_ROW = gql`
+mutation UpdateProductRow($id: ID!, $name: String, $description: String, $price: Float, $cost: Float, $parStock: Int, $quantity: Int) {
+    updateProductRow(_id: $id, name: $name, description: $description, price: $price, cost: $cost, parStock: $parStock, quantity: $quantity) {
+      _id
+      cost
+      description
+      name
+      parStock
+      price
+      quantity
+    }
+  }
+  `
 
     
