@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import { GET_ALL_PRODUCTS_ADMIN } from "../utils/queries";
-import { useQuery } from "@apollo/client";
+import { UPDATE_PRODUCT_ROW } from "../utils/mutations";
+import { useQuery, useMutation } from "@apollo/client";
 
 import "../styles/AdminProducts.css";
+
+
 function AdminProducts() {
   // Display all products
   // iterates over the list of products and creates a link to the single product page
   //shows image, name, price, and add to cart button
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState();
+
+  const [updateRow] = useMutation(UPDATE_PRODUCT_ROW);
 
   let productList;
   const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
@@ -17,18 +22,43 @@ function AdminProducts() {
   if (!loading && !error) {
     productList = data.allproducts;
   }
+
+  // allows admin to update the item information on the admin page 
+  const handleUpdateProduct = async(event) =>{
+    console.log(modalContent._id);
+    event.preventDefault();
+    try{
+      const updatingRow = await updateRow({
+        variables: { 
+          id: modalContent._id,
+          name: modalContent.name,
+          price: JSON.parse(modalContent.price),
+          cost: JSON.parse(modalContent.cost),
+          parStock: JSON.parse(modalContent.parStock),
+          quantity: JSON.parse(modalContent.quantity),
+          description: modalContent.description,
+          
+        },
+      });
+      console.log(updatingRow);
+    }
+    catch(e){
+      console.log(e);
+    }
+  }
+
   // function to populate the modal when you click on a line
   const setContent=(event)=>{
     // console.log(event.target.parentNode.dataset.index);
     // console.log(productList[event.target.parentNode.dataset.index]);
     setModalContent({...productList[event.target.parentNode.dataset.index]})
     modalTrigger();
-    
+ }
 
-  }
-  // function to update the row info through the modal
+ // function to update the row info through the modal
   const modalUpdate = (event) =>{
     setModalContent({...modalContent, [event.target.name]: event.target.value})
+    console.log('update---log');
 }
 
 // function to open/close the modal
@@ -43,19 +73,19 @@ function AdminProducts() {
   return (
     <div>
       {showModal && (
-        <div className="input-field"> 
+        <form className="input-field" onSubmit={handleUpdateProduct}> 
             <input  className="input-name" type="text" value={modalContent.name} onChange={modalUpdate} name="name"/>
             <textarea  className="input-description" type="text" value={modalContent.description} onChange={modalUpdate} name="description"/>
             <input  type="number" value={modalContent.price} onChange={modalUpdate} name="price"/>
             <input  type="number" value={modalContent.cost} onChange={modalUpdate} name="cost"/>
             <input  type="number" value={modalContent.parStock} onChange={modalUpdate} name="parStock"/>
             <input  type="number" value={modalContent.quantity} onChange={modalUpdate} name="quantity"/>
-            <p>SAVE</p>
+            <button type="submit">SAVE</button>
             <span onClick={modalTrigger}>
               CLOSE
             </span>
 
-        </div>
+        </form>
       )}
       {/* Spreadsheet Labels */}
       <div className="admin-product">

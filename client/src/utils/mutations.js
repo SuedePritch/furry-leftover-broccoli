@@ -34,6 +34,7 @@ export const CREATE_DELIVERY = gql`
 }
 `
 
+
 export const ADD_QUANTITY = gql`
 mutation AddQuantity($id: ID!, $quantity: Int!) {
     addQuantity(_id: $id, quantity: $quantity) {
@@ -62,6 +63,21 @@ mutation DeleteDelivery($id: ID!) {
     }
   }
 `
+
+
+export const UPDATE_PRODUCT_ROW = gql`
+mutation UpdateProductRow($id: ID!, $name: String, $description: String, $price: Float, $cost: Float, $parStock: Int, $quantity: Int) {
+    updateProductRow(_id: $id, name: $name, description: $description, price: $price, cost: $cost, parStock: $parStock, quantity: $quantity) {
+      _id
+      cost
+      description
+      name
+      parStock
+      price
+      quantity
+    }
+  }
+  `
 
 
     
