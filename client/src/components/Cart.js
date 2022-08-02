@@ -4,21 +4,18 @@ import Auth from '../utils/auth';
 import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from '@apollo/client';
 import { idbPromise } from '../utils/helpers';
-// Missing
 import { QUERY_CHECKOUT } from '../utils/queries';
 import { useStoreContext } from '../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/actions';
-import './style.css';
+// will have to import css
 
 
-const stripePromise = loadStripe('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripePromise = loadStripe('pk_test_51LSLRKCvrmKlIBYd8OOpeFi9eVMocP6TsBxJCVYTCoB1Qf5HWYcTDRIc5sIePDwakOUWbofcLN3fnHSE8eqBLQnQ00iIyXEVeb');
 
 const Cart = () => {
     const [state, dispatch] = useStoreContext();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-  
-    // We check to see if there is a data object that exists, if so this means that a checkout session was returned from the backend
-    // Then we should redirect to the checkout with a reference to our session id
+
     useEffect(() => {
       if (data) {
         stripePromise.then((res) => {
@@ -27,8 +24,6 @@ const Cart = () => {
       }
     }, [data]);
   
-    // If the cart's length or if the dispatch function is updated, check to see if the cart is empty.
-    // If so, invoke the getCart method and populate the cart with the existing from the session
     useEffect(() => {
       async function getCart() {
         const cart = await idbPromise('cart', 'get');
@@ -80,7 +75,7 @@ const Cart = () => {
   
     return (
       <div className="cart">
-        <button onClick={toggleCart} > [close]</button> >
+        <button onClick={toggleCart} > [close]</button> 
         <h2>Shopping Cart</h2>
         {state.cart.length ? (
           <div>
