@@ -145,6 +145,7 @@ type Mutation {
     addProductDelivery(_id: ID!, products: String!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
     deleteDelivery(_id: ID!): Delivery
+    removeItemFromDelivery(_id: ID!, products: String!): Delivery
 
 
 }

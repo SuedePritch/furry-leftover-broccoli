@@ -33,6 +33,38 @@ export const CREATE_DELIVERY = gql`
   }
 }
 `
+
+
+export const ADD_QUANTITY = gql`
+mutation AddQuantity($id: ID!, $quantity: Int!) {
+    addQuantity(_id: $id, quantity: $quantity) {
+      _id
+      name
+      quantity
+    }
+  }
+`
+
+export const REMOVE_FROM_DELIVERY = gql`
+mutation RemoveItemFromDelivery($id: ID!, $products: String!) {
+    removeItemFromDelivery(_id: $id, products: $products) {
+      _id
+      products {
+        _id
+      }
+    }
+  }
+`
+
+export const DELETE_DELIVERY = gql`
+mutation DeleteDelivery($id: ID!) {
+    deleteDelivery(_id: $id) {
+      _id
+    }
+  }
+`
+
+
 export const UPDATE_PRODUCT_ROW = gql`
 mutation UpdateProductRow($id: ID!, $name: String, $description: String, $price: Float, $cost: Float, $parStock: Int, $quantity: Int) {
     updateProductRow(_id: $id, name: $name, description: $description, price: $price, cost: $cost, parStock: $parStock, quantity: $quantity) {
@@ -46,5 +78,6 @@ mutation UpdateProductRow($id: ID!, $name: String, $description: String, $price:
     }
   }
   `
+
 
     

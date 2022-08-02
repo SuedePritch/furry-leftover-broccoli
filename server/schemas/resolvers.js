@@ -315,6 +315,9 @@ const resolvers = {
   deleteDelivery: async ( parent, { _id }) => {
     return await Delivery.findByIdAndDelete( _id );
   },
+  removeItemFromDelivery: async ( parent, { _id, products }) => {
+    return await Delivery.findByIdAndUpdate( _id, {$pull: {products: products }}, { new: true})
+  }
     },
 };
 
