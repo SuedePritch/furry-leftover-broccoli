@@ -116,3 +116,35 @@ query Category($id: ID!) {
   }
 `
 
+export const GET_ALL_DELIVERIES = gql`
+query Query {
+  findAllDelivery {
+    _id
+    createdAt
+    products {
+      _id
+      name
+      cost
+      quantity
+      parStock
+    }
+    deliveryDate
+  }
+}
+`
+export const GET_DELIVERY_BY_ID = gql`
+query Query($id: ID!) {
+  findOneDelivery(_id: $id) {
+    _id
+    createdAt
+    products {
+      _id
+      name
+      cost
+      quantity
+    }
+    deliveryDate
+  }
+}
+`
+
