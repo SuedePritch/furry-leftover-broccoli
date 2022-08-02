@@ -60,6 +60,7 @@ const Cart = () => {
       getCheckout({
         variables: { products: productIds },
       });
+      
     }
   
     if (!state.cartOpen) {

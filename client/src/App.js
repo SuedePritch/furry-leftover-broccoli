@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {ApolloClient,InMemoryCache,ApolloProvider,createHttpLink,} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
+import { StoreProvider } from './utils/GlobalState';
+
 
 // Styling Imports
 import './App.css'
@@ -35,6 +37,7 @@ function App() {
     <ApolloProvider client={client}>
     <Router>
       <>
+      <StoreProvider>
         <Navbar />
         
         
@@ -69,8 +72,10 @@ function App() {
 
 
         <Footer />
+        </StoreProvider>
       </>
     </Router>
+    
     </ApolloProvider>
   );
 }

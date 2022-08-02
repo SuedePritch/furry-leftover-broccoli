@@ -43,14 +43,18 @@ function SingleProduct(item) {
 
   return (
     <div className="productItem-container">
-    <Link to={`/products/${_id}`}>
-      <img alt={name} src={`/images/${image}`}/>
+      <div className="productItem">
+      <Link to={`/products/${_id}`}>
+      <img alt={name} src={`${image}`}/>
       <p>{name}</p>
-    </Link>
+    
       <div>
         <span>${price}</span>
       </div>
+      </Link>
       <button onClick={addToCart}>Add to cart</button>
+      
+      </div>
     </div>
   );
 }

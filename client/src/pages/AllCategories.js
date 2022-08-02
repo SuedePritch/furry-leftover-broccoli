@@ -6,9 +6,10 @@ import Cart from "../components/Cart";
 const CategoryPage = () => {
   return (
     <div className="container">
+        <Cart/>
         <AllCategories/>
         <AllProducts/>
-        <Cart/>
+        
     </div>
   )
 }

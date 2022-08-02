@@ -1,5 +1,5 @@
 import '../styles/AllCategories.css';
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { GET_ALL_PRODUCTS } from '../utils/queries';
 import { useQuery } from '@apollo/client';
 
@@ -8,13 +8,14 @@ import SingleProduct from '../components/SingleProduct';
 import { useStoreContext } from '../utils/GlobalState';
 import { UPDATE_PRODUCTS } from '../utils/actions';
 import { idbPromise } from '../utils/helpers';
-const url = "/product/" 
+
+// const url = "/product/" 
 
 
 function Allproducts(){
   const [state, dispatch] = useStoreContext();
 
-  const { currentCategory } = state;
+  // const { currentCategory } = state;
 
   const { loading, data } = useQuery(GET_ALL_PRODUCTS);
 
@@ -22,9 +23,10 @@ function Allproducts(){
     if (data) {
       dispatch({
         type: UPDATE_PRODUCTS,
-        products: data.products,
+        products: data.allproducts,
       });
-      data.products.forEach((product) => {
+      const productsToDisplay = data.allproducts
+      productsToDisplay.forEach((product) => {
         idbPromise('products', 'put', product);
       });
     } else if (!loading) {
@@ -48,12 +50,13 @@ function Allproducts(){
           
           {productslisting.map((product) => (
             <SingleProduct
-              key={product._id}
-              _id={product._id}
-              image={product.image}
-              name={product.name}
-              price={product.price}
-            />
+            key={product._id}
+            _id={product._id}
+            image={product.images}
+            name={product.name}
+            price={product.price}
+          />
+            
           ))}
         </div>
       ) : (
@@ -64,8 +67,6 @@ function Allproducts(){
   )
 }
 // const Allproducts = () => {
-
-
 // // Display all products
 // // iterates over the list of products and creates a link to the single product page
 // //shows image, name, price, and add to cart button
