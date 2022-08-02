@@ -53,3 +53,37 @@ p{
     background: hsla(120, 100%, 30%, 0.8);
     box-shadow: inset 0 0  1px 2px black;
 }
+
+.input-field{
+    height: 20vh;
+    width: calc(100vw - 65px - 2rem);
+    position: sticky;
+    top:0;
+    left:0;
+    margin:1rem;
+    
+    
+
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-auto-rows: 1fr;
+    gap:0.5rem;
+    background:  var(--clr-primary-800);
+    opacity: 0.95;
+}
+.input-field > *{
+    text-align: center;
+    background: var(--clr-primary-800);
+    border:8px solid var(--clr-primary-200);
+    padding:1rem;
+}
+.input-name{
+    font-size: 1.3em;
+    grid-column: span 4;
+}
+.input-description{
+    text-align: left;
+    grid-column: span 3;
+    grid-row: span 4;
+    resize: none;
+}

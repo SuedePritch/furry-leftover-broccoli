@@ -19,8 +19,8 @@ function AdminProducts() {
   }
   // function to populate the modal when you click on a line
   const setContent=(event)=>{
-    console.log(event.target.parentNode.dataset.index);
-    console.log(productList[event.target.parentNode.dataset.index]);
+    // console.log(event.target.parentNode.dataset.index);
+    // console.log(productList[event.target.parentNode.dataset.index]);
     setModalContent({...productList[event.target.parentNode.dataset.index]})
     modalTrigger();
     
@@ -43,19 +43,18 @@ function AdminProducts() {
   return (
     <div>
       {showModal && (
-        <div>
-          <div>
-           <input type="text" value={modalContent.name} onChange={modalUpdate} name="name"/>
-           <input type="number" value={modalContent.price} onChange={modalUpdate} name="price"/>
-           <input type="number" value={modalContent.cost} onChange={modalUpdate} name="cost"/>
-           <input type="number" value={modalContent.parStock} onChange={modalUpdate} name="parStock"/>
-           <input type="number" value={modalContent.quantity} onChange={modalUpdate} name="quantity"/>
-           <span>Save</span>
-           <span onClick={modalTrigger}>
-              &times;
+        <div className="input-field"> 
+            <input  className="input-name" type="text" value={modalContent.name} onChange={modalUpdate} name="name"/>
+            <textarea  className="input-description" type="text" value={modalContent.description} onChange={modalUpdate} name="description"/>
+            <input  type="number" value={modalContent.price} onChange={modalUpdate} name="price"/>
+            <input  type="number" value={modalContent.cost} onChange={modalUpdate} name="cost"/>
+            <input  type="number" value={modalContent.parStock} onChange={modalUpdate} name="parStock"/>
+            <input  type="number" value={modalContent.quantity} onChange={modalUpdate} name="quantity"/>
+            <p>SAVE</p>
+            <span onClick={modalTrigger}>
+              CLOSE
             </span>
 
-          </div>
         </div>
       )}
       {/* Spreadsheet Labels */}
