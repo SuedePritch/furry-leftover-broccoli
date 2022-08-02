@@ -14,8 +14,9 @@ function AdminDelivery() {
       const creatingANewDelivery = await createDelivery({
         variables: { products: productIdListForDelivery},
       });
-      console.log(creatingANewDelivery)
+
       setRequestPreview([])
+      return creatingANewDelivery
     } catch (e) {
       console.log(e);
   }
@@ -85,10 +86,10 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
     }
     return(
 
-      <div className='container'>
+      <div className='admin-container'>
         {/* Spreadsheet Labels */}
           <div className="admin-delivery">
-            <h3>Inventory List</h3>
+            <h3 className='create-order'>Inventory List</h3>
             <div className="admin-delivery-list">
               <h3 className="admin-delivery-item admin-delivery-item-label">Id</h3>
               <h3 className="admin-delivery-item admin-delivery-item-label">Cost</h3>
@@ -120,13 +121,14 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
           </div>
             {/* Spreadsheet Labels */}
             <div className="admin-delivery">
-            <h3>Delivery Preview<button className='admin-delivery-item' onClick={handleDeliveryCreation}>Create</button></h3>
+            <h3 className='create-order'>Delivery Preview<button onClick={handleDeliveryCreation}>Create Order</button></h3>
             
               <div className="admin-delivery-list">
                 <h3 className="admin-delivery-item admin-delivery-item-label">Id</h3>
                 <h3 className="admin-delivery-item admin-delivery-item-label">Cost</h3>
                 <h3 className="admin-delivery-item admin-delivery-item-label">ParStock</h3>
                 <h3 className="admin-delivery-item admin-delivery-item-label">Quantity</h3>
+                <h3 className="admin-delivery-item admin-delivery-item-label">Edit</h3>
                 {/* <h3 className="admin-delivery-item admin-delivery-item-label" id='addProduct'>+</h3> */}
               </div>
           <AdminDeliveryList requestPreview={requestPreview}/>
