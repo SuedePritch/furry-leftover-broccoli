@@ -208,14 +208,14 @@ function AdminProducts() {
         {/* Spreadsheet content  */}
         {productList.map((product, index) => {
           return (
-            <div className="admin-product-list" key={product._id} data-index={index} onClick={setContent}>
-              <p className="admin-product-item" id="productname">
+            <div className="admin-product-list" key={product._id} data-index={index} >
+              <p className="admin-product-item" id="productname" onClick={setContent}>
                 {product.name}
               </p>
-              <p className="admin-product-item">{product.price}</p>
-              <p className="admin-product-item">{product.cost}</p>
-              <p className="admin-product-item">{product.parStock}</p>
-              <p className="admin-product-item">{product.quantity}</p>
+              <p className="admin-product-item" onClick={setContent}>{product.price}</p>
+              <p className="admin-product-item" onClick={setContent}>{product.cost}</p>
+              <p className="admin-product-item" onClick={setContent}>{product.parStock}</p>
+              <p className="admin-product-item" onClick={setContent}>{product.quantity}</p>
               <p className="admin-product-item" id={product._id} onClick={deleteAlert}>
                 X
               </p>
