@@ -102,9 +102,9 @@ function AdminDeliveryPreview({requestPreview}) {
           </h3>
           <h3
             className="admin-product-item admin-product-item-label"
-            id="addProduct"
+            id="received-label"
           >
-            Recieved
+            Received
           </h3>
         </div>
         {/* Spreadsheet content  */}
@@ -119,14 +119,14 @@ function AdminDeliveryPreview({requestPreview}) {
                     <p className="admin-product-item">{product.cost}</p>
                     <p className="admin-product-item">{product.parStock}</p>
                     <input type="text" className="admin-product-item" placeholder={product.quantity} name="quantity" id="quantity" onChange={handleChange}/>
-                    <button className="admin-product-item"  data-index={index} type="submit">
+                    <button className="admin-product-item" id='checkmark' data-index={index} type="submit">
                     ✅ 
                     </button>                 
             </form>
             
           );
         })}
-        <button id={deliveryList[0]._id} onClick={deleteCurrentDelivery}>all deliveries recieved</button>  
+        <button className="received-order-button" id={deliveryList[0]._id}  onClick={deleteCurrentDelivery}>Received Delivery</button>  
       </div>
     </div>
   )

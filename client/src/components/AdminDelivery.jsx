@@ -105,7 +105,7 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
                         <p className="admin-delivery-item">{delivery.cost}</p>
                         <p className="admin-delivery-item">{delivery.parStock}</p>
                         <p className="admin-delivery-item">{delivery.quantity}</p>
-                        <p className="admin-delivery-item" id='productdelete' onClick={handleAddToDelivery}
+                        <input type="checkbox" className="admin-delivery-item" id='add-product-to-order' onClick={handleAddToDelivery}
                           data-id={delivery._id}
                           data-name={delivery.name}
                           data-description={delivery.description}
@@ -114,7 +114,9 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
                           data-cost={delivery.cost}
                           data-parstock={delivery.parStock}
                           data-quantity={delivery.quantity}
-                          >+</p>
+                          >
+                            
+                          </input>
         
                       </div>
           })}
