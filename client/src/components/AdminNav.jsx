@@ -4,7 +4,7 @@ import '../styles/AdminNav.css'
 import logoSimple from '../assets/images/Binoculars.svg'
 import AdminDelivery from './AdminDelivery';
 import AdminProducts from './AdminProducts';
-import AdminCategory from './AdminCategory';
+// import AdminCategory from './AdminCategory';
 import AdminPreview from './AdminDeliveryPreview';
 
 
@@ -15,8 +15,8 @@ function AdminNav(props) {
     } 
     else if(props.state.page === "Products"){
         currentPage = <AdminProducts/>
-    } else if(props.state.page === "Category"){
-        currentPage = <AdminCategory />
+    // } else if(props.state.page === "Category"){
+    //     currentPage = <AdminCategory />
     } else if(props.state.page === "Preview"){
         currentPage = <AdminPreview />
     }
@@ -43,14 +43,6 @@ function AdminNav(props) {
             onClick={() => props.state.setPage("Products")}>
             {/* Products-SVG */}
             <svg viewBox="0 0 512 512"><g><g><path d="M139.13,0v233.739H384V0H139.13z M328.348,100.174H194.783V66.783h133.565V100.174z"/></g></g><g><g><path d="M5.565,267.13V512h233.739V267.13H5.565z M183.652,367.304H61.217v-33.391h122.435V367.304z"/></g></g><g><g><path d="M272.696,267.13V512h233.739V267.13H272.696z M450.783,367.304H328.348v-33.391h122.435V367.304z"/></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
-        </button>
-
-
-        <button 
-            className={props.state.page === "Category" ? 'active admin-icon' : 'admin-icon'} 
-            onClick={() => props.state.setPage("Category")}>
-            {/* category-svg */}
-            <svg viewBox="0 0 24 24" ><path d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm10 10h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zM17 3c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4zM7 13c-2.206 0-4 1.794-4 4s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4z"/></svg>
         </button>
 
 

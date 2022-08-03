@@ -78,6 +78,7 @@ mutation UpdateProductRow($id: ID!, $name: String, $description: String, $price:
     }
   }
   `
+
   
 export const SELL_PRODUCT = gql`
 mutation SellProduct($id: ID!, $quantity: Int!) {
@@ -87,5 +88,23 @@ mutation SellProduct($id: ID!, $quantity: Int!) {
   }
 }
 `
+
+ export const DELETE_PRODUCT = gql`
+ mutation DeleteProduct($id: ID!) {
+    deleteProduct(_id: $id) {
+      _id
+    }
+  }
+ ` 
+
+ export const CREATE_PRODUCT_ADD_CAT = gql`
+ mutation CreateProductAddToCat($name: String!, $description: String!, $images: [String], $price: Float!, $cost: Float!, $parStock: Int!, $quantity: Int!, $category: [ID]!) {
+    createProductAddToCat(name: $name, description: $description, images: $images, price: $price, cost: $cost, parStock: $parStock, quantity: $quantity, category: $category) {
+      _id
+    }
+  }
+ `
+
+
 
     
