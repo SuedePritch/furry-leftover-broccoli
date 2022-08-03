@@ -22,6 +22,11 @@
   ## Usage
 
   This app is meant to be used in a small business setting where a client is looking to launch their store into the Ecommerce world.
+  
+  ---
+  link to the deployed app [here](https://stockerinventory.herokuapp.com/)
+
+  ---
 
   ## Screenshots
 ![landingPage](./screenshots/landing_page.png)
