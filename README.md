@@ -24,28 +24,28 @@
   This app is meant to be used in a small business setting where a client is looking to launch their store into the Ecommerce world.
 
   ## Screenshots
-![landingPage](./furry-leftover-broccoli/screenshots/landing_page.png)
+![landingPage](./screenshots/landing_page.png)
 ---
 ---
-![singleproduct](./furry-leftover-broccoli/screenshots/consumer_single_product.png)
+![singleproduct](./screenshots/consumer_single_product.png)
 ---
 ---
-![allproducts](./furry-leftover-broccoli/screenshots/consumer_all_products.png)
+![allproducts](./screenshots/consumer_all_products.png)
 ---
 ---
-![admininventory](./furry-leftover-broccoli/screenshots/admin_inventory_list.png)
+![admininventory](./screenshots/admin_inventory_list.png)
 ---
 ---
-![adminedit](./furry-leftover-broccoli/screenshots/admin_edit_one_item.png)
+![adminedit](./screenshots/admin_edit_one_item.png)
 ---
 ---
-![admineditall](./furry-leftover-broccoli/screenshots/admin_edit_inventory.png)
+![admineditall](./screenshots/admin_edit_inventory.png)
 ---
 ---
-![deliveryPage](./furry-leftover-broccoli/screenshots/admin_delivery_page.png)
+![deliveryPage](./screenshots/admin_delivery_page.png)
 ---
 ---
-![createProduct](./furry-leftover-broccoli/screenshots/admin_create_product.png)
+![createProduct](./screenshots/admin_create_product.png)
 ---
 ---
   ## Technology
