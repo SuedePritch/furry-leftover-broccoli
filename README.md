@@ -84,7 +84,7 @@ Github Profiles:
 ---
 [Fraser Kennedy](https://github.com/ydennekrf)
 ---
-[Steven Fudge](https://github.com/stephenfudge)
+[Stephen Fudge](https://github.com/stephenfudge)
 ---
 [Tyler Omoto](https://github.com/tyomoto) 
 ---
