@@ -29,7 +29,6 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
                             <h2 className='product-name'>{product.name}</h2>
                             <p className='price'>${product.price}</p>
                         </div>
-                            <button className='add-to-cart-btn'>Add to Cart</button>
                     </Link>
         })} 
         </div>

@@ -78,6 +78,17 @@ mutation UpdateProductRow($id: ID!, $name: String, $description: String, $price:
     }
   }
   `
+
+  
+export const SELL_PRODUCT = gql`
+mutation SellProduct($id: ID!, $quantity: Int!) {
+  sellProduct(_id: $id, quantity: $quantity) {
+    _id
+    quantity
+  }
+}
+`
+
  export const DELETE_PRODUCT = gql`
  mutation DeleteProduct($id: ID!) {
     deleteProduct(_id: $id) {
@@ -93,6 +104,7 @@ mutation UpdateProductRow($id: ID!, $name: String, $description: String, $price:
     }
   }
  `
+
 
 
     
