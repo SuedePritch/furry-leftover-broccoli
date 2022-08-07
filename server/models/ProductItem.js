@@ -6,7 +6,7 @@ const ProductItemSchema = new Schema({
         type: Number,
         min: 1,
     },
-    IsShipped: {
+    isShipped: {
         type: Boolean,
         default: false
     },

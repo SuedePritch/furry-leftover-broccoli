@@ -168,6 +168,7 @@ type Mutation {
     removeProductInOrder(_id: ID!, productItem: ID!): InOrder
     deleteProductInOrder(_id: ID!): InOrder
     deleteProductItem(_id: ID!): ProductItem
+    updateProductItem(_id: ID!, isShipped: Boolean, quantity: Int): ProductItem
 
 
 }

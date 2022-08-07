@@ -1,4 +1,4 @@
-const { User, Store, Category, Order, Products, AdminAddInventory, Delivery } = require('../models');
+const { User, Store, Category, Order, Products, ProductItem, InOrder, Delivery } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
@@ -330,13 +330,13 @@ const resolvers = {
   },
 
   // update a delivery
-  updateProductDelivery: async ( parent, { _id,  products }) => {
-    return await Delivery.findByIdAndUpdate( _id, { $set: { products: products }}, {new: true})
+  updateProductItem: async ( parent, { _id,  isShipped, quantity }) => {
+    return await ProductItem.findByIdAndUpdate( _id, { $set: { isShipped: isShipped, quantity: quantity }}, {new: true})
   },
 
   //add product to delivery
-  addProductDelivery: async ( parent, { _id, products }) => {
-    return await Delivery.findByIdAndUpdate( _id, { $addToSet: { products: products}}, {new: true})
+  addProductDelivery: async ( parent, { _id, productItem }) => {
+    return await Delivery.findByIdAndUpdate( _id, { $addToSet: { productItem: productItem}}, {new: true})
   },
 
   //set delivery date
@@ -350,9 +350,10 @@ const resolvers = {
     return await Delivery.findByIdAndDelete( _id );
     }
   },
-  removeItemFromDelivery: async ( parent, { _id, products }, context) => {
+  //remove item from the delivery
+  deleteProductItem: async ( parent, { _id }, context) => {
     if(context.user.isAdmin){
-    return await Delivery.findByIdAndUpdate( _id, {$pull: {products: products }}, { new: true})
+    return await ProductItem.findByIdAndDelete( _id );
     }
   }
     },
