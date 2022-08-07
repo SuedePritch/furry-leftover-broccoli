@@ -25,7 +25,9 @@ type Products {
     quantity: Int
     category: [Category]
 }
-type: ProductItem {
+
+
+type ProductItem {
     _id: ID
     quantity: Int
     IsShipped: Boolean
@@ -33,6 +35,7 @@ type: ProductItem {
     delivery: Delivery
     inOrder: InOrder
 }
+
 
 type InOrder {
     _id: ID
@@ -158,7 +161,7 @@ type Mutation {
     createDelivery(productItem:[ID], createdAt:String, deliveryDate: String):Delivery
     updateProductDelivery(_id: ID!, productItem: [ID]!): Delivery
 
-    addProductDelivery(_id: ID!, productItem: ID!): Delivery
+    addProductDelivery(quantity: Int!, isShipped: Boolean, products: ID!, delivery: ID!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
     deleteDelivery(_id: ID!): Delivery
     removeItemFromDelivery(_id: ID!, productItem: ID!): Delivery

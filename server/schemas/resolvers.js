@@ -91,13 +91,13 @@ const resolvers = {
     //Cart for user
 
 
-    order: async (parent, { _id }, context) => {
-      const user = await User.findById(
-        {_id: context.user._id}
-        );
+    // order: async (parent, { _id }, context) => {
+    //   const user = await User.findById(
+    //     {_id: context.user._id}
+    //     );
 
-      return user.orders.id(_id);
-    },
+    //   return user.orders.id(_id);
+    // },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products});
@@ -140,16 +140,16 @@ const resolvers = {
     //GET ALL DELIVERY ORDERS
 
     findAllDelivery: async (parent, { _id }, context) => {
-      if(context.user.isAdmin){
+      // if(context.user.isAdmin){
         return await Delivery.find().populate('products');
-      }
+      // }
     },
 
     // GET ONE DELIVERY ORDER
     findOneDelivery: async (parent, { _id }, context) => {
-      if(context.user.isAdmin){
+      // if(context.user.isAdmin){
       return await Delivery.findById(_id).populate('products');
-      }
+      // }
     }
     
   },
@@ -289,9 +289,9 @@ const resolvers = {
 
     //create category
     createCategory: async (parent, args, context) => {
-      if(context.user.isAdmin){
+      // if(context.user.isAdmin){
       return await Category.create(args);
-      }
+      // }
     },
 
     //add product to category
@@ -316,17 +316,20 @@ const resolvers = {
       }
     },
     createProduct: async(parent, products, context) => {
-      if(context.user.isAdmin){
+      // if(context.user.isAdmin){
       return await Products.create(products);
-      }
+      // }
     },
 
 
   // ADDINVENTORY
   createDelivery: async ( parent, args, context) => {
-    if(context.user.isAdmin){
+    // if(context.user.isAdmin){
     return await Delivery.create(args)
-    }
+    // }
+  },
+  createProductItem: async ( parent, args, context) => {
+    return await ProductItem.create(args)
   },
 
   // update a delivery
@@ -335,7 +338,7 @@ const resolvers = {
   },
 
   //add product to delivery
-  addProductDelivery: async ( parent, { _id, productItem }) => {
+  addProductDelivery: async ( parent, productItem) => {
     const newProduct = await ProductItem.create(productItem);
     return await Delivery.findByIdAndUpdate( newProduct.delivery, { $push: { productItem: newProduct._id}}, {new: true})
   },
@@ -353,9 +356,9 @@ const resolvers = {
   },
   //remove item from the delivery
   deleteProductItem: async ( parent, { _id }, context) => {
-    if(context.user.isAdmin){
+    // if(context.user.isAdmin){
     return await ProductItem.findByIdAndDelete( _id );
-    }
+    // }
   }
     },
 };
