@@ -15,6 +15,14 @@ const ProductItemSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Products',
         },
+    delivery: {
+        type: Schema.Types.ObjectId,
+        ref: 'Delivery',
+    },
+    inOrder: {
+        type: Schema.Types.ObjectId,
+        ref: 'InOrder',
+    }
 });
 
 const ProductItem = mongoose.model('ProductItem', ProductItemSchema);

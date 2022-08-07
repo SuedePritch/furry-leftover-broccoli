@@ -151,12 +151,13 @@ type Mutation {
     createProduct(name: String, description: String, images: [String], price: Float, cost: Float, parStock: Int, quantity: Int, category: [ID]): Products
 
     ##ADDINVENTORY
-    createDelivery(products:[ID], createdAt:String, deliveryDate: String):Delivery
-    updateProductDelivery(_id: ID!, products: String!): Delivery
-    addProductDelivery(_id: ID!, products: String!): Delivery
+    createDelivery(productItem:[ID], createdAt:String, deliveryDate: String):Delivery
+    updateProductDelivery(_id: ID!, productItem: [ID]!): Delivery
+    
+    addProductDelivery(_id: ID!, productItem: ID!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
     deleteDelivery(_id: ID!): Delivery
-    removeItemFromDelivery(_id: ID!, products: String!): Delivery
+    removeItemFromDelivery(_id: ID!, productItem: ID!): Delivery
 
 
 }
