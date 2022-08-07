@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ALL_DELIVERIES } from '../utils/queries';
 import { ADD_QUANTITY } from "../utils/mutations";
@@ -13,23 +13,23 @@ function AdminDeliveryPreview({requestPreview}) {
  const [deleteDelivery] = useMutation(DELETE_DELIVERY);
  const [deleteReload, setDeleteReload] = useState("james");
  const [recieveDeliveryItem, setRecieveItem] = useState({ id: '', quantity: ''})
-    const [orderPreview, setOrderPreview] = useState(
-        [
-        {
-            "_id": "1",
-            "name": "Order Preview",
-            "description": "See it here",
-            "images": " ",
-            "price": "1",
-            "cost": "2",
-            "parStock": "3",
-            "quantity": "3",
-          }
-    ])
-    useEffect(() => {
-        setDeleteReload("nothing");
-        console.log('helllo')
-      });
+    // const [orderPreview, setOrderPreview] = useState(
+    //     [
+    //     {
+    //         "_id": "1",
+    //         "name": "Order Preview",
+    //         "description": "See it here",
+    //         "images": " ",
+    //         "price": "1",
+    //         "cost": "2",
+    //         "parStock": "3",
+    //         "quantity": "3",
+    //       }
+    // ])
+    // useEffect(() => {
+    //     setDeleteReload("nothing");
+    //     // console.log('helllo')
+    //   });
 
 
     let deliveryList;
@@ -46,7 +46,6 @@ function AdminDeliveryPreview({requestPreview}) {
         event.preventDefault();
         
         try{
-            console.log(deliveryList);
             const deliveryMutation = await updateDelivery ({
                 variables: { id: clickID , quantity: JSON.parse(recieveDeliveryItem.quantity) }
             });
@@ -55,8 +54,8 @@ function AdminDeliveryPreview({requestPreview}) {
             const deliveryMutationB = await deleteFromDelivery ({
                 variables: { id: deliveryList._id , products: clickID }
             });
-            // deleteFromDelivery(deliveryMutationB);
-            return deliveryMutation, deliveryMutationB
+            console.log(deliveryMutation, deliveryMutationB);
+            return 
 
         } catch (e) {
             console.log(e);

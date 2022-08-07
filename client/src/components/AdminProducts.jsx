@@ -6,12 +6,12 @@ import { CREATE_PRODUCT_ADD_CAT } from "../utils/mutations";
 import { useQuery, useMutation } from "@apollo/client";
 import "../styles/AdminProducts.css";
 
-const Categories = [
-  { label: "Collectibles", value: "62e18b19df691851404f8b61"},
-  { label: "Toys", value: "62e18b8fdf691851404f8b63"},
-  { label: "Video Games", value: "62e18b73df691851404f8b62"},
-  { label: "Apparel", value: "62e18ba3df691851404f8b64"}
-];
+// const Categories = [
+//   { label: "Collectibles", value: "62e18b19df691851404f8b61"},
+//   { label: "Toys", value: "62e18b8fdf691851404f8b63"},
+//   { label: "Video Games", value: "62e18b73df691851404f8b62"},
+//   { label: "Apparel", value: "62e18ba3df691851404f8b64"}
+// ];
 
 
 function AdminProducts() {
