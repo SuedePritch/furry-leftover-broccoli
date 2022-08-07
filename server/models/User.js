@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const Order = require('./Order')
+const InOrder = require('./InOrder')
 
 const userSchema = new Schema(
   {
@@ -33,14 +33,14 @@ const userSchema = new Schema(
       required: false,
       default: false,
     },
-    // set true for a premium client
-    premium: {
+    // set true for a warehouse user
+    isWarehouse: {
       type: Boolean,
       required: false,
       default: false,
     },
     //order history
-    orders: [Order.schema],
+    orders: [InOrder.schema],
     }
 );
 

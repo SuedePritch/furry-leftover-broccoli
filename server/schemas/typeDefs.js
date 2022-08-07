@@ -25,11 +25,22 @@ type Products {
     quantity: Int
     category: [Category]
 }
+type: ProductItem {
+    _id: ID
+    quantity: Int
+    IsShipped: Boolean
+    products: Products
+}
 
-type Order {
+type InOrder {
     _id: ID
     purchaseDate: String
-    products: [Products]
+    productItem: [ProductItem]
+}
+type OutOrder {
+    _id: ID
+    purchaseDate: String
+    productItem: [ProductItem]
 }
 type Delivery {
     _id: ID
@@ -91,8 +102,8 @@ type Query {
 
 
     # ORDER & INVENTORY
-    order(_id: ID!): Order
-    checkout(products: [ID]!): Checkout
+    inOrder(_id: ID!): InOrder
+    checkout(productItem: [ID]!, quantity: Int!, products: [ID]!): Order
     findAllDelivery: [Delivery]
     findOneDelivery (_id: ID!): Delivery
     
