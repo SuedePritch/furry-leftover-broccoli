@@ -336,7 +336,8 @@ const resolvers = {
 
   //add product to delivery
   addProductDelivery: async ( parent, { _id, productItem }) => {
-    return await Delivery.findByIdAndUpdate( _id, { $addToSet: { productItem: productItem}}, {new: true})
+    const newProduct = await ProductItem.create(productItem);
+    return await Delivery.findByIdAndUpdate( newProduct.delivery, { $push: { productItem: newProduct._id}}, {new: true})
   },
 
   //set delivery date
