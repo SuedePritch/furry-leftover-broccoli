@@ -6,10 +6,10 @@ const deliverySchema = new Schema({
         type: Date,
         default: Date.now(),
     },
-    products: [
+    productItem: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Products'
+            ref: 'ProductItem'
         }
     ],
     deliveryDate: {
