@@ -8,7 +8,46 @@ function AdminDelivery() {
   
   const [requestPreview, setRequestPreview] = useState([]) 
   const [createDelivery] = useMutation(CREATE_DELIVERY)
+  let deliveryArray = requestPreview
   
+  
+
+  
+  
+  const automatedAddToDelivery = (productList) =>{
+    for (let i = 0; i < productList.length; i++) {
+      const lowStockItem = productList[i];
+      
+      if (lowStockItem.quantity - lowStockItem.parStock < 11) {
+        for (let j = 0; j < deliveryArray.length; j++) {
+          const isInListAlready = deliveryArray[j];
+          if(isInListAlready._id.includes(productList[i]._id)){
+          return
+        }
+        }
+          const productAutoObj = {
+            "_id": lowStockItem._id,
+            "name": lowStockItem.name,
+            "description": lowStockItem.description,
+            "images": lowStockItem.images,
+            "price": lowStockItem.price,
+            "cost": lowStockItem.cost,
+            "parStock": lowStockItem.parStock,
+            "quantity": lowStockItem.quantity,
+          }
+          deliveryArray.push(productAutoObj)
+        }
+
+    }
+    // setRequestPreview([...deliveryArray])
+  }
+
+
+
+
+
+
+
   const handleDeliveryCreation = async (event) =>{
     try{
       const creatingANewDelivery = await createDelivery({
@@ -16,6 +55,7 @@ function AdminDelivery() {
       });
 
       setRequestPreview([])
+      deliveryArray= []
       return creatingANewDelivery
     } catch (e) {
       console.log(e);
@@ -34,6 +74,7 @@ function AdminDelivery() {
 
 
   const handleAddToDelivery = (event) =>{
+    event.preventDefault();
     const productClicked = event.target.dataset
     const productClickedObj = {
       "_id": productClicked.id,
@@ -45,16 +86,11 @@ function AdminDelivery() {
       "parStock": productClicked.parstock,
       "quantity": productClicked.quantity,
     }
-
- 
-
     //checks current array to make sure we dont add duplicates
     //this throws error about react keys in a map
     //better ux anyways
-    let deliveryArray = requestPreview
     for (let i = 0; i < deliveryArray.length; i++) {
       const deliveryNoDubplicates = deliveryArray[i]._id;
-      
       if(productClickedObj._id.includes(deliveryNoDubplicates)){
         console.log('Already In Delivery')
         return
@@ -83,7 +119,9 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
     if (error) return `Error! ${error.message}`;
     if(!loading && !error){
     productList = data.allproducts
-    }
+    automatedAddToDelivery(productList);
+  }
+
     return(
 
       <div className='admin-container'>
