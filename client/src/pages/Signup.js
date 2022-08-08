@@ -20,7 +20,8 @@ const Signup = () =>{
             const token = userMutationResponse.data.addUser.token;
           Auth.login(token);
       } catch (e) {
-          console.log(e);
+        console.log(e)
+          alert('Email or Username already taken')
       }
   };
     const handleChange = (event) => {

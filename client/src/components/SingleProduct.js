@@ -26,6 +26,7 @@ const SingleProduct = () => {
 
             variables: {id: sellClickID, quantity: 1 }
           })
+          return sellingMutation
         } catch (e) {
           console.log(e);
       }  

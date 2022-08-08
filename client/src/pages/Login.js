@@ -20,7 +20,7 @@ const LoginForm = () => {
             const token = userMutationResponse.data.login.token;
             Auth.login(token);
         } catch (e) {
-            console.log(e);
+            alert('Login Failed');
         }
     };
 
