@@ -140,16 +140,16 @@ const resolvers = {
     //GET ALL DELIVERY ORDERS
 
     findAllDelivery: async (parent, { _id }, context) => {
-      // if(context.user.isAdmin){
+      if(context.user.isAdmin){
         return await Delivery.find().populate('products');
-      // }
+      }
     },
 
     // GET ONE DELIVERY ORDER
     findOneDelivery: async (parent, { _id }, context) => {
-      // if(context.user.isAdmin){
+      if(context.user.isAdmin){
       return await Delivery.findById(_id).populate('products');
-      // }
+      }
     }
     
   },
@@ -289,9 +289,9 @@ const resolvers = {
 
     //create category
     createCategory: async (parent, args, context) => {
-      // if(context.user.isAdmin){
+      if(context.user.isAdmin){
       return await Category.create(args);
-      // }
+      }
     },
 
     //add product to category
@@ -316,23 +316,26 @@ const resolvers = {
       }
     },
     createProduct: async(parent, products, context) => {
-      // if(context.user.isAdmin){
+      if(context.user.isAdmin){
       return await Products.create(products);
-      // }
+      }
     },
 
 
   // ADDINVENTORY
+
+  //create a delivery
   createDelivery: async ( parent, args, context) => {
-    // if(context.user.isAdmin){
+    if(context.user.isAdmin){
     return await Delivery.create(args)
-    // }
+    }
   },
+  //create item to add to delivery
   createProductItem: async ( parent, args, context) => {
     return await ProductItem.create(args)
   },
 
-  // update a delivery
+  // update a delivery or InOrder's products
   updateProductItem: async ( parent, { _id,  isShipped, quantity }) => {
     return await ProductItem.findByIdAndUpdate( _id, { $set: { isShipped: isShipped, quantity: quantity }}, {new: true})
   },
@@ -356,11 +359,29 @@ const resolvers = {
   },
   //remove item from the delivery
   deleteProductItem: async ( parent, { _id }, context) => {
-    // if(context.user.isAdmin){
+    if(context.user.isAdmin){
     return await ProductItem.findByIdAndDelete( _id );
-    // }
-  }
-    },
+    }
+  },
+
+  // WAREHOUSE ADDINVENTORY
+
+  //warehouse user uses the admin created Delivery and creates a warehouse created InOrder 
+  //which restocks the inventory when marked as shipped
+
+  // use createProductItem to add products to InOrder
+  createInOrder: async ( parent, args, context) => {
+    if(context.user.isWarehouse){
+      return await InOrder.create(args)
+    }
+  },
+  deleteInOrder: async ( parent, {_id}, context) => {
+    if(context.user.isWarehouse) {
+      return await InOrder.findByIdAndDelete(_id);
+    }
+  },
+
+},
 };
 
 module.exports = resolvers;

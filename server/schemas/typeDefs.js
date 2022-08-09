@@ -159,17 +159,11 @@ type Mutation {
     ##ADDINVENTORY
     createProductItem(quantity: Int, products: ID!, delivery: ID, inOrder: ID): ProductItem
     createDelivery(productItem:[ID], createdAt:String, deliveryDate: String):Delivery
-    updateProductDelivery(_id: ID!, productItem: [ID]!): Delivery
-
     addProductDelivery(quantity: Int!, isShipped: Boolean, products: ID!, delivery: ID!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
     deleteDelivery(_id: ID!): Delivery
-    removeItemFromDelivery(_id: ID!, productItem: ID!): Delivery
-
     createInOrder(productItem:[ID], createdAt:String): InOrder
-    updateProductInOrder(_id: ID!, productItem: [ID]!): InOrder
-    removeProductInOrder(_id: ID!, productItem: ID!): InOrder
-    deleteProductInOrder(_id: ID!): InOrder
+    deleteInOrder(_id: ID!): InOrder
     deleteProductItem(_id: ID!): ProductItem
     updateProductItem(_id: ID!, isShipped: Boolean, quantity: Int): ProductItem
 
