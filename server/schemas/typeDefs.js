@@ -29,19 +29,12 @@ type Products {
 
 type ProductItem {
     _id: ID
-    quantity: Int
+    quantityInc: Int
     IsShipped: Boolean
     products: Products
     delivery: Delivery
-    inOrder: InOrder
 }
 
-
-type InOrder {
-    _id: ID
-    purchaseDate: String
-    productItem: [ProductItem]
-}
 type Order {
     _id: ID
     purchaseDate: String
@@ -52,6 +45,7 @@ type Delivery {
     createdAt: String
     productItem: [ProductItem]
     deliveryDate: String
+    isComplete: Boolean
 }
 
 type User {
@@ -105,14 +99,10 @@ type Query {
 
 
     # ORDER & INVENTORY
-    findAllInOrder: [InOrder]
-
-    inOrder(_id: ID!): InOrder
     checkout(products: [ID]!): Checkout
-
     findAllDelivery: [Delivery]
     findOneDelivery(_id: ID!): Delivery
-    order(_id: ID!): User
+    order(_id: ID!): Order
 }
 
 
@@ -150,15 +140,13 @@ type Mutation {
     createProduct(name: String, description: String, images: [String], price: Float, cost: Float, parStock: Int, quantity: Int, category: [ID]): Products
 
     ##ADDINVENTORY
-    createProductItem(quantity: Int, products: ID!, delivery: ID, inOrder: ID): ProductItem
+    createProductItem(quantityInc: Int, products: ID!, delivery: ID): ProductItem
     createDelivery(productItem:[ID], createdAt:String, deliveryDate: String):Delivery
-    addProductDelivery(quantity: Int!, isShipped: Boolean, productItem: ID!, delivery: ID!): Delivery
+    addProductDelivery(quantityInc: Int!, isShipped: Boolean, productItem: ID!, delivery: ID!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
     deleteDelivery(_id: ID!): Delivery
-    createInOrder(productItem:[ID], createdAt:String): InOrder
-    deleteInOrder(_id: ID!): InOrder
     deleteProductItem(_id: ID!, delivery: String, inOrder: String): ProductItem
-    updateProductItem(_id: ID!, isShipped: Boolean, quantity: Int): ProductItem
+    updateProductItem(_id: ID!, isShipped: Boolean, quantityInc: Int): ProductItem
 }
 
 `;

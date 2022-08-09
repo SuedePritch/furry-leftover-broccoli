@@ -15,6 +15,11 @@ const deliverySchema = new Schema({
     deliveryDate: {
         type: Date,
         default: ((Date.now())+  86400000*1)
+    },
+    isComplete: {
+        type: Boolean,
+        required: true,
+        default: false,
     }
 })
 
