@@ -111,7 +111,6 @@ type Query {
     order(_id: ID!): Order
     findAllDelivery: [Delivery]
     findOneDelivery(_id: ID!): Delivery
-    order(_id: ID!): User
 }
 
 
