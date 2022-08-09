@@ -111,8 +111,8 @@ type Query {
     checkout(products: [ID]!): Checkout
 
     findAllDelivery: [Delivery]
-    findOneDelivery (_id: ID!): Delivery
-    
+    findOneDelivery(_id: ID!): Delivery
+    order(_id: ID!): User
 }
 
 
