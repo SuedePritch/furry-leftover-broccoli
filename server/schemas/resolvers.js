@@ -91,13 +91,13 @@ const resolvers = {
     //Cart for user
 
 
-    // order: async (parent, { _id }, context) => {
-    //   const user = await User.findById(
-    //     {_id: context.user._id}
-    //     );
+    order: async (parent, { _id }, context) => {
+      const user = await User.findById(
+        {_id: context.user._id}
+        );
 
-    //   return user.orders.id(_id);
-    // },
+      return user.orders.id(_id);
+    },
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products});
@@ -141,17 +141,31 @@ const resolvers = {
 
     findAllDelivery: async (parent, { _id }, context) => {
       if(context.user.isAdmin){
-        return await Delivery.find().populate('products');
+        return await Delivery.find().populate('productItem');
       }
     },
 
     // GET ONE DELIVERY ORDER
     findOneDelivery: async (parent, { _id }, context) => {
       if(context.user.isAdmin){
-      return await Delivery.findById(_id).populate('products');
+      return await Delivery.findById(_id).populate('productItem');
+      }
+    },
+
+    //WAREHOUSE
+    //GET INORDER BY ID
+    findOneInOrder: async ( parent, { _id }, context) => {
+      if(context.user.isWarehouse){
+        return await InOrder.findById(_id).populate('productItem');
+      }
+    },
+    
+    //GET ALL INORDERS
+    findAllInOrder: async (parent, context) => {
+      if(context.user.isWarehouse){
+        return await InOrder.find().populate('productItem');
       }
     }
-    
   },
 
 

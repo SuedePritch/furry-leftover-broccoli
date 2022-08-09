@@ -108,19 +108,12 @@ type Query {
 
     # ORDER & INVENTORY
     findAllInOrder: [InOrder]
-    inOrder(_id: ID!): InOrder
+    findOneInOrder(_id: ID!): InOrder
     checkout(productItem: [ID]!, quantity: Int!, products: [ID]!): Order
     findAllDelivery: [Delivery]
     findOneDelivery (_id: ID!): Delivery
     
 }
-
-
-
-
-
-
-
 
 
 type Mutation {
