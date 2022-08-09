@@ -45,6 +45,7 @@ type Delivery {
     createdAt: String
     productItem: [ProductItem]
     deliveryDate: String
+    isComplete: Boolean
 }
 
 type User {
@@ -98,7 +99,7 @@ type Query {
 
 
     # ORDER & INVENTORY
-     checkout(products: [ID]!): Checkout
+    checkout(products: [ID]!): Checkout
     findAllDelivery: [Delivery]
     findOneDelivery(_id: ID!): Delivery
     order(_id: ID!): Order
