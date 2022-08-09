@@ -28,7 +28,7 @@ function AdminDeliveryList({requestPreview}) {
                   <p className="admin-delivery-item">{deliveryItem.cost}</p>
                   <p className="admin-delivery-item">{deliveryItem.parStock}</p>
                   <p className="admin-delivery-item">{deliveryItem.quantity}</p>
-                  <p className="admin-delivery-item">*</p>
+                  <p className="admin-delivery-item"></p>
                 </div>
               })}
           </div>
