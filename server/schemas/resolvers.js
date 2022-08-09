@@ -1,4 +1,4 @@
-const { User, Store, Category, Order, Products, ProductItem, InOrder, Delivery } = require('../models');
+const { User, Store, Category, Order, Products, ProductItem, Delivery } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const stripe = require('stripe')('sk_test_51LUdzuAFQla15oHnF33bPTaw63RS6AgoQrH9YAnvQSQdtgcaPpP60LURTy8nCaT6vAcO7iliyLMS8TJXJ1QfGiW100bOquz9EJ');
@@ -369,30 +369,10 @@ const resolvers = {
       console.log(delivery);
       if(delivery){
         await Delivery.findByIdAndUpdate(delivery, {$pull: {productItem: _id }});
-      } else {
-        await InOrder.findByIdAndUpdate(inOrder, {$pull: {productItem: _id }});
       }
     return await ProductItem.findByIdAndDelete( _id );
     // }
   },
-
-  // WAREHOUSE ADDINVENTORY
-
-  //warehouse user uses the admin created Delivery and creates a warehouse created InOrder 
-  //which restocks the inventory when marked as shipped
-
-  // use createProductItem to add products to InOrder
-  createInOrder: async ( parent, args, context) => {
-    if(context.user.isWarehouse){
-      return await InOrder.create(args)
-    }
-  },
-  deleteInOrder: async ( parent, {_id}, context) => {
-    if(context.user.isWarehouse) {
-      return await InOrder.findByIdAndDelete(_id);
-    }
-  },
-
 },
 };
 

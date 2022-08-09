@@ -156,33 +156,7 @@ mutation SellProduct($id: ID!, $quantity: Int!) {
 }
  `
 
- export const CREATE_INORDER = gql`
- mutation CreateInOrder($createdAt: String) {
-  createInOrder(createdAt: $createdAt) {
-    _id
-    purchaseDate
-    productItem {
-      _id
-      quantity
-      IsShipped
-      products {
-        name
-      }
-      delivery {
-        _id
-      }
-    }
-  }
-}
- `
 
- export const DELETE_INORDER = gql`
- mutation DeleteInOrder($id: ID!) {
-  deleteInOrder(_id: $id) {
-    _id
-  }
-}
- `
 
 
     
