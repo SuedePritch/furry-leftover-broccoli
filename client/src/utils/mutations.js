@@ -105,6 +105,84 @@ mutation SellProduct($id: ID!, $quantity: Int!) {
   }
  `
 
+ export const ADD_PRODUCT_DELIVERY = gql`
+ mutation AddProductDelivery($quantity: Int!, $productItem: ID!, $delivery: ID!) {
+  addProductDelivery(quantity: $quantity, productItem: $productItem, delivery: $delivery) {
+    _id
+    createdAt
+    productItem {
+      _id
+      quantity
+      products {
+        _id
+        name
+        price
+        cost
+        parStock
+        quantity
+      }
+      delivery {
+        _id
+      }
+    }
+  }
+}
+ `
+
+ export const UPDATE_PRODUCT_ITEM = gql`
+ mutation UpdateProductItem($id: ID!, $isShipped: Boolean, $quantity: Int) {
+  updateProductItem(_id: $id, isShipped: $isShipped, quantity: $quantity) {
+    _id
+    quantity
+    IsShipped
+    products {
+      _id
+    }
+    delivery {
+      _id
+    }
+    inOrder {
+      _id
+    }
+  }
+}
+ `
+
+ export const REMOVE_DELETE_PRODUCTITEM = gql`
+ mutation DeleteProductItem($id: ID!, $delivery: String, $inOrder: String) {
+  deleteProductItem(_id: $id, delivery: $delivery, inOrder: $inOrder) {
+    _id
+  }
+}
+ `
+
+ export const CREATE_INORDER = gql`
+ mutation CreateInOrder($createdAt: String) {
+  createInOrder(createdAt: $createdAt) {
+    _id
+    purchaseDate
+    productItem {
+      _id
+      quantity
+      IsShipped
+      products {
+        name
+      }
+      delivery {
+        _id
+      }
+    }
+  }
+}
+ `
+
+ export const DELETE_INORDER = gql`
+ mutation DeleteInOrder($id: ID!) {
+  deleteInOrder(_id: $id) {
+    _id
+  }
+}
+ `
 
 
     

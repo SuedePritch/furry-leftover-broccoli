@@ -148,3 +148,46 @@ query Query($id: ID!) {
 }
 `
 
+export const GET_ALL_INORDER = gql`
+query Query {
+  findAllInOrder {
+    _id
+    purchaseDate
+    productItem {
+      _id
+      quantity
+      IsShipped
+      products {
+        _id
+        name
+        parStock
+        quantity
+      }
+      inOrder {
+        _id
+      }
+    }
+  }
+}
+`
+
+export const GET_INORDER_BY_ID = gql`
+query Query($id: ID!) {
+  findOneInOrder(_id: $id) {
+    _id
+    purchaseDate
+    productItem {
+      _id
+      quantity
+      IsShipped
+      products {
+        _id
+        name
+        parStock
+        quantity
+      }
+    }
+  }
+}
+`
+
