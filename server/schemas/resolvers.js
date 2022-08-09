@@ -370,6 +370,24 @@ const resolvers = {
     return await ProductItem.findByIdAndDelete( _id );
     // }
   },
+
+  // WAREHOUSE ADDINVENTORY
+
+  //warehouse user uses the admin created Delivery and creates a warehouse created InOrder 
+  //which restocks the inventory when marked as shipped
+
+  // use createProductItem to add products to InOrder
+  createInOrder: async ( parent, args, context) => {
+    if(context.user.isWarehouse){
+      return await InOrder.create(args)
+    }
+  },
+  deleteInOrder: async ( parent, {_id}, context) => {
+    if(context.user.isWarehouse) {
+      return await InOrder.findByIdAndDelete(_id);
+    }
+  },
+
 },
 };
 

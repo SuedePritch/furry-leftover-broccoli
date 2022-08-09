@@ -105,10 +105,10 @@ type Query {
 
 
     # ORDER & INVENTORY
-    checkout(products: [ID]!): Checkout
     findAllInOrder: [InOrder]
     findOneInOrder(_id: ID!): InOrder
     order(_id: ID!): Order
+    checkout(products: [ID]!): Order
     findAllDelivery: [Delivery]
     findOneDelivery(_id: ID!): Delivery
 }
@@ -153,6 +153,8 @@ type Mutation {
     addProductDelivery(quantity: Int!, isShipped: Boolean, productItem: ID!, delivery: ID!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
     deleteDelivery(_id: ID!): Delivery
+    createInOrder(productItem:[ID], createdAt:String): InOrder
+    deleteInOrder(_id: ID!): InOrder
     deleteProductItem(_id: ID!, delivery: String, inOrder: String): ProductItem
     updateProductItem(_id: ID!, isShipped: Boolean, quantity: Int): ProductItem
 }
