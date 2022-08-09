@@ -106,6 +106,9 @@ type Query {
 
     # ORDER & INVENTORY
     checkout(products: [ID]!): Checkout
+    findAllInOrder: [InOrder]
+    findOneInOrder(_id: ID!): InOrder
+    order(_id: ID!): Order
     findAllDelivery: [Delivery]
     findOneDelivery(_id: ID!): Delivery
     order(_id: ID!): User
