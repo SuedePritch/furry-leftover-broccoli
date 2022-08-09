@@ -9,7 +9,7 @@ import { GET_SINGLE_PRODUCT} from '../utils/queries';
 
 
 const SingleProduct = () => {
-  const [sellProduct] = useMutation(SELL_PRODUCT);
+//   const [sellProduct] = useMutation(SELL_PRODUCT);
 
     let productItem;
     const { productId } = useParams();
