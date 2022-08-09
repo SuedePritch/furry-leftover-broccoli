@@ -45,7 +45,7 @@ type InOrder {
 type Order {
     _id: ID
     purchaseDate: String
-    productItem: [ProductItem]
+    products: [Products]
 }
 type Delivery {
     _id: ID
@@ -104,23 +104,15 @@ type Query {
     user: User
 
 
-
-
     # ORDER & INVENTORY
     findAllInOrder: [InOrder]
-    inOrder(_id: ID!): InOrder
-    checkout(productItem: [ID]!, quantity: Int!, products: [ID]!): Order
+    findOneInOrder(_id: ID!): InOrder
+    order(_id: ID!): Order
+    checkout(products: [ID]!): Order
     findAllDelivery: [Delivery]
     findOneDelivery (_id: ID!): Delivery
     
 }
-
-
-
-
-
-
-
 
 
 type Mutation {
@@ -159,21 +151,13 @@ type Mutation {
     ##ADDINVENTORY
     createProductItem(quantity: Int, products: ID!, delivery: ID, inOrder: ID): ProductItem
     createDelivery(productItem:[ID], createdAt:String, deliveryDate: String):Delivery
-    updateProductDelivery(_id: ID!, productItem: [ID]!): Delivery
-
-    addProductDelivery(quantity: Int!, isShipped: Boolean, products: ID!, delivery: ID!): Delivery
+    addProductDelivery(quantity: Int!, isShipped: Boolean, productItem: ID!, delivery: ID!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
     deleteDelivery(_id: ID!): Delivery
-    removeItemFromDelivery(_id: ID!, productItem: ID!): Delivery
-
     createInOrder(productItem:[ID], createdAt:String): InOrder
-    updateProductInOrder(_id: ID!, productItem: [ID]!): InOrder
-    removeProductInOrder(_id: ID!, productItem: ID!): InOrder
-    deleteProductInOrder(_id: ID!): InOrder
-    deleteProductItem(_id: ID!): ProductItem
+    deleteInOrder(_id: ID!): InOrder
+    deleteProductItem(_id: ID!, delivery: String, inOrder: String): ProductItem
     updateProductItem(_id: ID!, isShipped: Boolean, quantity: Int): ProductItem
-
-
 }
 
 `;

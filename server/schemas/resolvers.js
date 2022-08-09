@@ -90,14 +90,16 @@ const resolvers = {
     //SHOPPING CART & STRIPE
     //Cart for user
 
+//used for stripe
+    order: async (parent, { _id }, context) => {
+      const user = await User.findById(context.user._id).populate({
+        path: 'orders.products',
+        populate: 'category'
+      });
+      return user.orders.id(_id);
+    },
 
-    // order: async (parent, { _id }, context) => {
-    //   const user = await User.findById(
-    //     {_id: context.user._id}
-    //     );
-
-    //   return user.orders.id(_id);
-    // },
+    //used for stripe
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products});
@@ -140,18 +142,32 @@ const resolvers = {
     //GET ALL DELIVERY ORDERS
 
     findAllDelivery: async (parent, { _id }, context) => {
-      // if(context.user.isAdmin){
-        return await Delivery.find().populate('products');
-      // }
+      if(context.user.isAdmin){
+        return await Delivery.find().populate('productItem');
+      }
     },
 
     // GET ONE DELIVERY ORDER
     findOneDelivery: async (parent, { _id }, context) => {
-      // if(context.user.isAdmin){
-      return await Delivery.findById(_id).populate('products');
-      // }
-    }
+      if(context.user.isAdmin){
+      return await Delivery.findById(_id).populate('productItem');
+      }
+    },
+
+    //WAREHOUSE
+    //GET INORDER BY ID
+    findOneInOrder: async ( parent, { _id }, context) => {
+      if(context.user.isWarehouse){
+        return await InOrder.findById(_id).populate('productItem');
+      }
+    },
     
+    //GET ALL INORDERS
+    findAllInOrder: async (parent, context) => {
+      if(context.user.isWarehouse){
+        return await InOrder.find().populate('productItem');
+      }
+    }
   },
 
 
@@ -289,9 +305,9 @@ const resolvers = {
 
     //create category
     createCategory: async (parent, args, context) => {
-      // if(context.user.isAdmin){
+      if(context.user.isAdmin){
       return await Category.create(args);
-      // }
+      }
     },
 
     //add product to category
@@ -316,23 +332,26 @@ const resolvers = {
       }
     },
     createProduct: async(parent, products, context) => {
-      // if(context.user.isAdmin){
+      if(context.user.isAdmin){
       return await Products.create(products);
-      // }
+      }
     },
 
 
   // ADDINVENTORY
+
+  //create a delivery
   createDelivery: async ( parent, args, context) => {
-    // if(context.user.isAdmin){
+    if(context.user.isAdmin){
     return await Delivery.create(args)
-    // }
+    }
   },
+  //create item to add to delivery
   createProductItem: async ( parent, args, context) => {
     return await ProductItem.create(args)
   },
 
-  // update a delivery
+  // update a delivery or InOrder's products
   updateProductItem: async ( parent, { _id,  isShipped, quantity }) => {
     return await ProductItem.findByIdAndUpdate( _id, { $set: { isShipped: isShipped, quantity: quantity }}, {new: true})
   },
@@ -354,13 +373,37 @@ const resolvers = {
     return await Delivery.findByIdAndDelete( _id );
     }
   },
-  //remove item from the delivery
-  deleteProductItem: async ( parent, { _id }, context) => {
+  //remove item from the delivery or inOrder
+  deleteProductItem: async ( parent, { _id, delivery, inOrder }, context) => {
     // if(context.user.isAdmin){
+      console.log(delivery);
+      if(delivery){
+        await Delivery.findByIdAndUpdate(delivery, {$pull: {productItem: _id }});
+      } else {
+        await InOrder.findByIdAndUpdate(inOrder, {$pull: {productItem: _id }});
+      }
     return await ProductItem.findByIdAndDelete( _id );
     // }
-  }
-    },
+  },
+
+  // WAREHOUSE ADDINVENTORY
+
+  //warehouse user uses the admin created Delivery and creates a warehouse created InOrder 
+  //which restocks the inventory when marked as shipped
+
+  // use createProductItem to add products to InOrder
+  createInOrder: async ( parent, args, context) => {
+    if(context.user.isWarehouse){
+      return await InOrder.create(args)
+    }
+  },
+  deleteInOrder: async ( parent, {_id}, context) => {
+    if(context.user.isWarehouse) {
+      return await InOrder.findByIdAndDelete(_id);
+    }
+  },
+
+},
 };
 
 module.exports = resolvers;
