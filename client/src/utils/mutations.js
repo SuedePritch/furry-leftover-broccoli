@@ -130,10 +130,10 @@ mutation SellProduct($id: ID!, $quantity: Int!) {
  `
 
  export const UPDATE_PRODUCT_ITEM = gql`
- mutation UpdateProductItem($id: ID!, $isShipped: Boolean, $quantity: Int) {
-  updateProductItem(_id: $id, isShipped: $isShipped, quantity: $quantity) {
+ mutation UpdateProductItem($id: ID!, $isShipped: Boolean, $quantityInc: Int) {
+  updateProductItem(_id: $id, isShipped: $isShipped, quantityInc: $quantityInc) {
     _id
-    quantity
+    quantityInc
     IsShipped
     products {
       _id
@@ -149,8 +149,8 @@ mutation SellProduct($id: ID!, $quantity: Int!) {
  `
 
  export const REMOVE_DELETE_PRODUCTITEM = gql`
- mutation DeleteProductItem($id: ID!, $delivery: String, $inOrder: String) {
-  deleteProductItem(_id: $id, delivery: $delivery, inOrder: $inOrder) {
+ mutation DeleteProductItem($id: ID!, $delivery: String) {
+  deleteProductItem(_id: $id, delivery: $delivery) {
     _id
   }
 }

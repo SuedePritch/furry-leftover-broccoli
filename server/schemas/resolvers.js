@@ -342,8 +342,8 @@ const resolvers = {
   },
 
   // update a delivery or InOrder's products
-  updateProductItem: async ( parent, { _id,  isShipped, quantity }) => {
-    return await ProductItem.findByIdAndUpdate( _id, { $set: { isShipped: isShipped, quantity: quantity }}, {new: true})
+  updateProductItem: async ( parent, { _id,  isShipped, quantityInc }) => {
+    return await ProductItem.findByIdAndUpdate( _id, { $set: { isShipped: isShipped, quantityInc: quantityInc }}, {new: true})
   },
 
   //add product to delivery
@@ -364,7 +364,7 @@ const resolvers = {
     }
   },
   //remove item from the delivery or inOrder
-  deleteProductItem: async ( parent, { _id, delivery, inOrder }, context) => {
+  deleteProductItem: async ( parent, { _id, delivery }, context) => {
     // if(context.user.isAdmin){
       console.log(delivery);
       if(delivery){
