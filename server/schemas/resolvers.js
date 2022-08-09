@@ -90,14 +90,16 @@ const resolvers = {
     //SHOPPING CART & STRIPE
     //Cart for user
 
-
+//used for stripe
     order: async (parent, { _id }, context) => {
-      const user = await User.findById(
-        {_id: context.user._id}
-        );
-
+      const user = await User.findById(context.user._id).populate({
+        path: 'orders.products',
+        populate: 'category'
+      });
       return user.orders.id(_id);
     },
+
+    //used for stripe
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products});
@@ -371,11 +373,17 @@ const resolvers = {
     return await Delivery.findByIdAndDelete( _id );
     }
   },
-  //remove item from the delivery
-  deleteProductItem: async ( parent, { _id }, context) => {
-    if(context.user.isAdmin){
+  //remove item from the delivery or inOrder
+  deleteProductItem: async ( parent, { _id, delivery, inOrder }, context) => {
+    // if(context.user.isAdmin){
+      console.log(delivery);
+      if(delivery){
+        await Delivery.findByIdAndUpdate(delivery, {$pull: {productItem: _id }});
+      } else {
+        await InOrder.findByIdAndUpdate(inOrder, {$pull: {productItem: _id }});
+      }
     return await ProductItem.findByIdAndDelete( _id );
-    }
+    // }
   },
 
   // WAREHOUSE ADDINVENTORY
