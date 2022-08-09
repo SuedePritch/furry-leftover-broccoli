@@ -2,8 +2,8 @@
 import '../styles/SingleProduct.css';
 
 import { useParams } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/client';
-import { SELL_PRODUCT } from '../utils/mutations';
+import { useQuery } from '@apollo/client';
+// import { SELL_PRODUCT } from '../utils/mutations';
 
 import { GET_SINGLE_PRODUCT} from '../utils/queries';
 

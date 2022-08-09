@@ -12,7 +12,7 @@ const url = "/category/"
 const AllCategories = () => {
     let category;
     
-  const { loading, error, data } = useQuery(GET_ALL_CATEGORIES, {pollInterval:100});
+  const { loading, error, data } = useQuery(GET_ALL_CATEGORIES, {pollInterval:10000});
     if (loading) return '';
     if (error) return `Error! ${error.message}`;
     if(!loading && !error){

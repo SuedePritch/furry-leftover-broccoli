@@ -153,21 +153,6 @@ const resolvers = {
       return await Delivery.findById(_id).populate('productItem');
       }
     },
-
-    //WAREHOUSE
-    //GET INORDER BY ID
-    findOneInOrder: async ( parent, { _id }, context) => {
-      if(context.user.isWarehouse){
-        return await InOrder.findById(_id).populate('productItem');
-      }
-    },
-    
-    //GET ALL INORDERS
-    findAllInOrder: async (parent, context) => {
-      if(context.user.isWarehouse){
-        return await InOrder.find().populate('productItem');
-      }
-    }
   },
 
 
