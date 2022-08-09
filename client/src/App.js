@@ -17,6 +17,7 @@ import Main from './pages/Main';
 import CategoryPage from './pages/CategoryPage';
 import AdminMain from './pages/AdminMain';
 import Landing from './pages/Landing'
+import { StoreProvider } from './utils/GlobalState';
 
 
 require('dotenv').config();
@@ -35,6 +36,7 @@ function App() {
     <ApolloProvider client={client}>
     <Router>
       <>
+      <StoreProvider>
         <Navbar />
         
         
@@ -69,6 +71,7 @@ function App() {
 
 
         <Footer />
+        </StoreProvider>
       </>
     </Router>
     </ApolloProvider>

@@ -4,14 +4,13 @@ import Auth from '../utils/auth';
 import { loadStripe } from '@stripe/stripe-js';
 import { useLazyQuery } from '@apollo/client';
 import { idbPromise } from '../utils/helpers';
-// Missing
 import { QUERY_CHECKOUT } from '../utils/queries';
 import { useStoreContext } from '../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/actions';
-import './style.css';
+// import './style.css';
 
 
-const stripePromise = loadStripe('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const stripePromise = loadStripe('pk_test_51LUdzuAFQla15oHnhGqEIr7idCEhiVIYKPTDOEmXdwLhXEEk4iCq2ZrrTH8ge4OVBYlHZUDMSNcptyFPTtQQKgk300rQeM2LC0');
 
 const Cart = () => {
     const [state, dispatch] = useStoreContext();
@@ -55,6 +54,7 @@ const Cart = () => {
     // When the submit checkout method is invoked, loop through each item in the cart
     // Add each item id to the productIds array and then invoke the getCheckout query passing an object containing the id for all our products
     function submitCheckout() {
+      console.log('working');
       const productIds = [];
   
       state.cart.forEach((item) => {
@@ -77,10 +77,11 @@ const Cart = () => {
         </div>
       );
     }
-  
+  console.log(state);
+
     return (
       <div className="cart">
-        <button onClick={toggleCart} > [close]</button> >
+        <button onClick={toggleCart} > [close]</button> 
         <h2>Shopping Cart</h2>
         {state.cart.length ? (
           <div>
