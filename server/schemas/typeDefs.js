@@ -110,8 +110,8 @@ type Query {
     order(_id: ID!): Order
     checkout(products: [ID]!): Order
     findAllDelivery: [Delivery]
-    findOneDelivery(_id: ID!): Delivery
-    order(_id: ID!): User
+    findOneDelivery (_id: ID!): Delivery
+    
 }
 
 
