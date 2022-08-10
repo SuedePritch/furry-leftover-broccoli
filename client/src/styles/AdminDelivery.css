@@ -13,7 +13,7 @@ p{
 
 .admin-delivery-list{
     display: grid;
-    grid-template-columns: 4fr 2fr 2fr 2fr 1fr;
+    grid-template-columns: 4fr 2fr 2fr 2fr 2fr;
     grid-auto-rows: 1fr;
     text-decoration: none;
     text-align: right;

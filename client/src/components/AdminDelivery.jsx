@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import { GET_ALL_PRODUCTS_ADMIN } from '../utils/queries';
-import { CREATE_DELIVERY } from '../utils/mutations';
-import { useQuery, useMutation } from '@apollo/client';
+// import { CREATE_DELIVERY } from '../utils/mutations';
+import { useQuery } from '@apollo/client';
 import '../styles/AdminDelivery.css'
 import AdminDeliveryList from './AdminDeliveryList';
 function AdminDelivery() {
   
   const [requestPreview, setRequestPreview] = useState([]) 
-  const [createDelivery] = useMutation(CREATE_DELIVERY)
+  // const [createDelivery] = useMutation(CREATE_DELIVERY)
   let deliveryArray = requestPreview
   
   
@@ -49,27 +49,29 @@ function AdminDelivery() {
 
 
   const handleDeliveryCreation = async (event) =>{
-    try{
-      const creatingANewDelivery = await createDelivery({
-        variables: { products: productIdListForDelivery},
-      });
-
-      setRequestPreview([])
-      deliveryArray= []
-      return creatingANewDelivery
-    } catch (e) {
-      console.log(e);
+    console.log(requestPreview)
   }
-  }
+  //   try{
+  //     const creatingANewDelivery = await createDelivery({
+  //       variables: { products: productIdListForDelivery},
+  //     });
+
+  //     setRequestPreview([])
+  //     deliveryArray= []
+  //     return creatingANewDelivery
+  //   } catch (e) {
+  //     console.log(e);
+  // }
+  // }
 
   
   
   
-  let productIdListForDelivery = []
-      requestPreview.map((productIds)=>{
-      productIdListForDelivery.push(productIds._id)
-      return productIdListForDelivery
-    })
+  // let productIdListForDelivery = []
+  //     requestPreview.map((productIds)=>{
+  //     productIdListForDelivery.push(productIds._id)
+  //     return productIdListForDelivery
+  //   })
 
 
 
