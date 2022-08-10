@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-
+const Order = require('./Order');
 
 const userSchema = new Schema(
   {
@@ -40,8 +40,9 @@ const userSchema = new Schema(
       default: false,
     },
     //order history
-    // orders: [InOrder.schema],
-    },
+    orders: [Order.schema],
+    }
+
 );
 
 // hash user password and/or credit card number

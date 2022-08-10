@@ -25,11 +25,18 @@ export const ADD_USER = gql`
     }
 `
 export const CREATE_DELIVERY = gql`
-    mutation createDelivery($products: [ID]) {
-    createDelivery(products: $products) {
-            products {
-                _id
-            }
+mutation CreateDelivery($productItem: [ID]) {
+  createDelivery(productItem: $productItem) {
+    _id
+    createdAt
+    productItem {
+      _id
+      quantityInc
+      isShipped
+      products {
+        _id
+      }
+    }
   }
 }
 `
@@ -46,14 +53,11 @@ mutation AddQuantity($id: ID!, $quantity: Int!) {
 `
 
 export const REMOVE_FROM_DELIVERY = gql`
-mutation RemoveItemFromDelivery($id: ID!, $products: String!) {
-    removeItemFromDelivery(_id: $id, products: $products) {
-      _id
-      products {
-        _id
-      }
-    }
+mutation DeleteProductItem($id: ID!, $delivery: String) {
+  deleteProductItem(_id: $id, delivery: $delivery) {
+    _id
   }
+}
 `
 
 export const DELETE_DELIVERY = gql`
@@ -134,27 +138,27 @@ mutation SellProduct($id: ID!, $quantity: Int!) {
   updateProductItem(_id: $id, isShipped: $isShipped, quantityInc: $quantityInc) {
     _id
     quantityInc
-    IsShipped
+    isShipped
     products {
       _id
     }
     delivery {
       _id
     }
-    inOrder {
-      _id
-    }
   }
 }
  `
 
- export const REMOVE_DELETE_PRODUCTITEM = gql`
- mutation DeleteProductItem($id: ID!, $delivery: String) {
-  deleteProductItem(_id: $id, delivery: $delivery) {
+ export const SET_DELIVERY_COMPLETE = gql`
+ mutation SetIsComplete($id: ID!, $isComplete: Boolean!) {
+  setIsComplete(_id: $id, isComplete: $isComplete) {
     _id
+    isComplete
   }
 }
  `
+
+ 
 
 
 
