@@ -1,0 +1,30 @@
+.cart{
+    position: fixed;
+    right:0;
+    top:0;
+    z-index:10;
+
+    padding:2.5rem;
+    overflow-y: scroll;
+    height: max-content;
+    border-bottom: 14px solid var(--clr-primary-200);
+    width:100vw;
+    background: var(--clr-primary-800);
+}
+.close-button{
+    position: absolute;
+    right:20px;
+    top:10px;
+    width: fit-content;
+    padding:0.125rem 0.35rem;
+    font-size: 0.8em;
+}
+.checkout-button{
+    position: absolute;
+    z-index: 11;
+    right:50px;
+    bottom:10px;
+    width: fit-content;
+    padding:0.125rem 0.35rem;
+    font-size: 0.8em;
+}

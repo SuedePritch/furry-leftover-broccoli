@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import logoSimple from '../assets/images/Binoculars.svg';
 import jwtdecode from 'jwt-decode';
 import { useState, useEffect } from 'react';
+import Cart from "../components/Cart";
 
 
 const Navbar = (props) =>{
@@ -38,13 +39,16 @@ return (
         
 <ul>
     {isAdmin ?
-            <li><Link to="/admin">Admin</Link></li>
-            : <li><Link to="/category">Home</Link></li>
+            <><li><Link to="/admin">Admin</Link></li><li><Cart/></li></>
+            : <><li><Link to="/category">Home</Link></li><li><Cart/></li></>
         }
 
     {loggedIn ?  <li onClick={signout}>Log Out</li>
     :
-        <li><Link to="/login">Login</Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to="/signup">Signup</Link></li>
+        <>
+        <li><Link to="/login">Login</Link></li>
+        <li><Link to="/signup">Signup</Link></li>
+        </>
 }
   </ul>
         

@@ -110,21 +110,21 @@ mutation SellProduct($id: ID!, $quantity: Int!) {
  `
 
  export const ADD_PRODUCT_DELIVERY = gql`
- mutation AddProductDelivery($quantity: Int!, $productItem: ID!, $delivery: ID!) {
-  addProductDelivery(quantity: $quantity, productItem: $productItem, delivery: $delivery) {
+ mutation AddProductDelivery($quantityInc: Int!, $products: ID!, $delivery: ID!) {
+  addProductDelivery(quantityInc: $quantityInc, products: $products, delivery: $delivery) {
     _id
     createdAt
     productItem {
       _id
-      quantity
-      products {
-        _id
-        name
-        price
-        cost
-        parStock
-        quantity
-      }
+      quantityInc
+      # products {
+      #   _id
+      #   name
+      #   price
+      #   cost
+      #   parStock
+      #   quantity
+      # }
       delivery {
         _id
       }
