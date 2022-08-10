@@ -7,7 +7,7 @@ import { idbPromise } from '../utils/helpers';
 import { QUERY_CHECKOUT } from '../utils/queries';
 import { useStoreContext } from '../utils/GlobalState';
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from '../utils/actions';
-// import './style.css';
+import '../styles/Cart.css'
 
 
 const stripePromise = loadStripe('pk_test_51LUdzuAFQla15oHnhGqEIr7idCEhiVIYKPTDOEmXdwLhXEEk4iCq2ZrrTH8ge4OVBYlHZUDMSNcptyFPTtQQKgk300rQeM2LC0');
@@ -54,7 +54,7 @@ const Cart = () => {
     // When the submit checkout method is invoked, loop through each item in the cart
     // Add each item id to the productIds array and then invoke the getCheckout query passing an object containing the id for all our products
     function submitCheckout() {
-      console.log('working');
+      // console.log('working');
       const productIds = [];
   
       state.cart.forEach((item) => {
@@ -77,11 +77,11 @@ const Cart = () => {
         </div>
       );
     }
-  console.log(state);
+  // console.log(state);
 
     return (
       <div className="cart">
-        <button onClick={toggleCart} > [close]</button> 
+        <button onClick={toggleCart} className="close-button"> X</button> 
         <h2>Shopping Cart</h2>
         {state.cart.length ? (
           <div>
@@ -92,7 +92,7 @@ const Cart = () => {
   
               {/* Check to see if the user is logged in. If so render a button to check out */}
               {Auth.loggedIn() ? (
-                <button onClick={submitCheckout}>Checkout</button>
+                <button className="checkout-button" onClick={submitCheckout}>Checkout</button>
               ) : (
                 <span>(log in to check out)</span>
               )}
