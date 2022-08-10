@@ -6,6 +6,7 @@ import AdminDelivery from './AdminDelivery';
 import AdminProducts from './AdminProducts';
 // import AdminCategory from './AdminCategory';
 import AdminPreview from './AdminDeliveryPreview';
+import WarehouseDelivery from './WarehouseDelivery';
 
 
 function AdminNav(props) {
@@ -19,7 +20,10 @@ function AdminNav(props) {
     //     currentPage = <AdminCategory />
     } else if(props.state.page === "Preview"){
         currentPage = <AdminPreview />
+    }else if(props.state.page === "Warehouse"){
+        currentPage = <WarehouseDelivery />
     }
+
     return (
         <>
         {/* 
@@ -52,6 +56,14 @@ function AdminNav(props) {
             {/* BARCODE-svg */}
             <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M0 448V64h18v384H0zm26.857-.273V64H36v383.727h-9.143zm27.143 0V64h8.857v383.727H54zm44.857 0V64h8.857v383.727h-8.857zm36 0V64h17.714v383.727h-17.714zm44.857 0V64h8.857v383.727h-8.857zm18 0V64h8.857v383.727h-8.857zm18 0V64h8.857v383.727h-8.857zm35.715 0V64h18v383.727h-18zm44.857 0V64h18v383.727h-18zm35.999 0V64h18.001v383.727h-18.001zm36.001 0V64h18.001v383.727h-18.001zm26.857 0V64h18v383.727h-18zm45.143 0V64h26.857v383.727h-26.857zm35.714 0V64h9.143v383.727H476zm18 .273V64h18v384h-18z"/></svg>
         </button>
+
+        <button 
+            className={props.state.page === "" ? 'active admin-icon' : 'admin-icon'} 
+            onClick={() => props.state.setPage("Warehouse")}>
+            {/* delivery-van-svrepo.com.svg */}
+            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M315.588,256.572c-19.742,0-35.74,15.993-35.74,35.737c0,19.745,15.998,35.738,35.74,35.738 c19.75,0,35.744-15.993,35.744-35.738C351.332,272.565,335.338,256.572,315.588,256.572z M315.588,307.846 c-8.582,0-15.535-6.955-15.535-15.537c0-8.586,6.953-15.537,15.535-15.537c8.584,0,15.543,6.951,15.543,15.537 C331.131,300.891,324.172,307.846,315.588,307.846z"/></svg>
+        </button>
+
 
     </div>
         <div className='content-section'>{currentPage}</div>
