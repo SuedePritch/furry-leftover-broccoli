@@ -34,6 +34,9 @@ p{
 .admin-delivery-item:nth-child(odd){
     background: var(--clr-darkhue);
 }
+#admin-delivery-input{
+    width:100%;
+}
 
 #productname{
     text-align: left;
