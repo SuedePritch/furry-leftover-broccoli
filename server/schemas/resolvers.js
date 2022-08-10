@@ -68,9 +68,6 @@ const resolvers = {
       
 
 
-
-
-
     //USER
     //Single User
     user: async (parent, { _id }, context)=> {  
@@ -83,7 +80,18 @@ const resolvers = {
   
     },
 
+    //PRODUCT ITEM
 
+    //All Shipped ProductItem
+    
+    shippedProductItem: async (parent,{ isShipped },  context) => {
+      console.log(isShipped)
+      const params = {}
+      if(isShipped){
+        params.isShipped = isShipped
+      }
+      return await ProductItem.find({isShipped}).populate('products');
+    },
 
 
 
@@ -147,9 +155,9 @@ const resolvers = {
     //GET ALL DELIVERY ORDERS
 
     findAllDelivery: async (parent, { _id }, context) => {
-      if(context.user.isAdmin){
+      // if(context.user.isAdmin){
         return await Delivery.find().populate('productItem');
-      }
+      // }
     },
 
     // GET ONE DELIVERY ORDER
@@ -341,7 +349,7 @@ const resolvers = {
     return await ProductItem.create(args)
   },
 
-  // update a delivery or InOrder's products
+  // update a delivery's products
   updateProductItem: async ( parent, { _id,  isShipped, quantityInc }) => {
     return await ProductItem.findByIdAndUpdate( _id, { $set: { isShipped: isShipped, quantityInc: quantityInc }}, {new: true})
   },
@@ -356,6 +364,8 @@ const resolvers = {
   setDeliveryDate: async ( parent, { _id, deliveryDate }) => {
     return await Delivery.findByIdAndUpdate(_id, { $set: {deliveryDate: deliveryDate}}, {new: true})
   },
+  //sets if the delivery isComplete or not
+  
 
   //delete a delivery
   deleteDelivery: async ( parent, { _id }, context) => {

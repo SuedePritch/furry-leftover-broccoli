@@ -30,7 +30,7 @@ type Products {
 type ProductItem {
     _id: ID
     quantityInc: Int
-    IsShipped: Boolean
+    isShipped: Boolean
     products: Products
     delivery: Delivery
 }
@@ -97,6 +97,10 @@ type Query {
     # USERS
     user: User
 
+    #PRODUCT ITEM
+
+    shippedProductItem(isShipped: Boolean): [ProductItem]
+
 
     # ORDER & INVENTORY
     checkout(products: [ID]!): Checkout
@@ -142,7 +146,7 @@ type Mutation {
     ##ADDINVENTORY
     createProductItem(quantityInc: Int, products: ID!, delivery: ID): ProductItem
     createDelivery(productItem:[ID], createdAt:String, deliveryDate: String):Delivery
-    addProductDelivery(quantityInc: Int!, isShipped: Boolean, productItem: ID!, delivery: ID!): Delivery
+    addProductDelivery(quantityInc: Int!, isShipped: Boolean, products: ID!, delivery: ID!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
     deleteDelivery(_id: ID!): Delivery
     deleteProductItem(_id: ID!, delivery: String, inOrder: String): ProductItem

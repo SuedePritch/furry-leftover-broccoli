@@ -148,46 +148,25 @@ query Query($id: ID!) {
 }
 `
 
-export const GET_ALL_INORDER = gql`
-query Query {
-  findAllInOrder {
+
+export const GET_SHIPPED_PRODUCTITEM = gql`
+query ShippedProductItem($isShipped: Boolean) {
+  shippedProductItem(isShipped: $isShipped) {
     _id
-    purchaseDate
-    productItem {
+    quantityInc
+    isShipped
+    products {
       _id
+      name
+      description
+      price
+      cost
+      parStock
       quantity
-      IsShipped
-      products {
-        _id
-        name
-        parStock
-        quantity
-      }
-      inOrder {
-        _id
-      }
+    }
+    delivery {
+      _id
     }
   }
 }
 `
-
-export const GET_INORDER_BY_ID = gql`
-query Query($id: ID!) {
-  findOneInOrder(_id: $id) {
-    _id
-    purchaseDate
-    productItem {
-      _id
-      quantity
-      IsShipped
-      products {
-        _id
-        name
-        parStock
-        quantity
-      }
-    }
-  }
-}
-`
-
