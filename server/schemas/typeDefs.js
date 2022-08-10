@@ -106,6 +106,7 @@ type Query {
     checkout(products: [ID]!): Checkout
     findAllDelivery: [Delivery]
     findOneDelivery(_id: ID!): Delivery
+    findNotCompleteDelivery(isComplete: Boolean): [Delivery]
     order(_id: ID!): Order
 }
 
@@ -148,8 +149,9 @@ type Mutation {
     createDelivery(productItem:[ID], createdAt:String, deliveryDate: String):Delivery
     addProductDelivery(quantityInc: Int!, isShipped: Boolean, products: ID!, delivery: ID!): Delivery
     setDeliveryDate(_id: ID!, deliveryDate: String!): Delivery
+    setIsComplete(_id: ID!, isComplete: Boolean!): Delivery
     deleteDelivery(_id: ID!): Delivery
-    deleteProductItem(_id: ID!, delivery: String, inOrder: String): ProductItem
+    deleteProductItem(_id: ID!, delivery: String): ProductItem
     updateProductItem(_id: ID!, isShipped: Boolean, quantityInc: Int): ProductItem
 }
 

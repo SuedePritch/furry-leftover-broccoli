@@ -170,3 +170,21 @@ query ShippedProductItem($isShipped: Boolean) {
   }
 }
 `
+
+export const GET_NOT_COMPLETE_DELIVERY = gql`
+query FindNotCompleteDelivery($isComplete: Boolean) {
+  findNotCompleteDelivery(isComplete: $isComplete) {
+    _id
+    createdAt
+    isComplete
+    productItem {
+      _id
+      quantityInc
+      isShipped
+      products {
+        _id
+      }
+    }
+  }
+}
+`

@@ -166,6 +166,15 @@ const resolvers = {
       return await Delivery.findById(_id).populate('productItem');
       }
     },
+
+    // GET DELIVERYS THAT ARE NOT COMPLETE
+    findNotCompleteDelivery: async (parent, { isComplete }, context) => {
+      const params = {};
+      if(!isComplete){
+        params.isComplete = isComplete
+      }
+      return await Delivery.find({isComplete}).populate('productItem')
+    },
   },
 
 
@@ -365,7 +374,9 @@ const resolvers = {
     return await Delivery.findByIdAndUpdate(_id, { $set: {deliveryDate: deliveryDate}}, {new: true})
   },
   //sets if the delivery isComplete or not
-  
+  setIsComplete: async (parent, {_id, isComplete }) => {
+    return await Delivery.findByIdAndUpdate(_id, { $set: { isComplete: isComplete }}, {new: true})
+  },
 
   //delete a delivery
   deleteDelivery: async ( parent, { _id }, context) => {
