@@ -18,6 +18,7 @@ import CategoryPage from './pages/CategoryPage';
 import AdminMain from './pages/AdminMain';
 import Landing from './pages/Landing'
 import { StoreProvider } from './utils/GlobalState';
+import Success from './pages/success';
 
 
 require('dotenv').config();
@@ -63,6 +64,8 @@ function App() {
           <Route path='/category' element={<Main />} />
           <Route path='/category/:categoryId'element={<CategoryPage />}/>
 
+          {/* Success Purhcase Routes */}
+          <Route path='/success' element={<Success/>}/>
 
           {/* Wildcard/404 Routes - Needs to stay at the bottom */}
           <Route path='*'element={<h1 className='display-2'>Wrong page!</h1>}/>
