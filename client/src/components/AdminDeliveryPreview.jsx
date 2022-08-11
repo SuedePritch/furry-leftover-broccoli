@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ALL_DELIVERIES } from '../utils/queries';
+import { GET_NOT_COMPLETE_DELIVERY } from '../utils/queries';
 import { ADD_QUANTITY } from "../utils/mutations";
 import { REMOVE_FROM_DELIVERY } from '../utils/mutations';
 import { DELETE_DELIVERY } from '../utils/mutations';
@@ -33,12 +33,12 @@ function AdminDeliveryPreview({requestPreview}) {
 
 
     let deliveryList;
-    const { loading, error, data } = useQuery(GET_ALL_DELIVERIES, {pollInterval: 1000});
+    const { loading, error, data } = useQuery(GET_NOT_COMPLETE_DELIVERY, {variables:{isComplete: false}});
     if (loading) return "Loading...";
     if (error) return `Error! ${error.message}`;
     if (!data) return `nomoare daate`
     if (!loading && !error) {
-      deliveryList = data.findAllDelivery;  
+      deliveryList = data.findNotCompleteDelivery[0].productItem
     };
 
     const handleReceiving = async (event) => {
