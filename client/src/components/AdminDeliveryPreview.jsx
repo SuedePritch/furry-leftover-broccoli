@@ -33,12 +33,11 @@ function AdminDeliveryPreview({requestPreview}) {
 
 
     let deliveryList;
-    const { loading, error, data } = useQuery(GET_NOT_COMPLETE_DELIVERY, {variables:{isComplete: false}});
+    const { loading, error, data } = useQuery(GET_NOT_COMPLETE_DELIVERY, {variables:{isComplete: true}});
     if (loading) return "Loading...";
     if (error) return `Error! ${error.message}`;
     if (!data) return `nomoare daate`
     if (!loading && !error) {
-      console.log(data);
       deliveryList = data.findNotCompleteDelivery[0].productItem
       console.log(deliveryList)
     };
@@ -64,13 +63,13 @@ function AdminDeliveryPreview({requestPreview}) {
         }  
     };
 
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setRecieveItem({
-            ...recieveDeliveryItem,
-            [name]: value,
-        });
-    };
+    // const handleChange = (event) => {
+    //     const { name, value } = event.target;
+    //     setRecieveItem({
+    //         ...recieveDeliveryItem,
+    //         [name]: value,
+    //     });
+    // };
 
     const deleteCurrentDelivery = async (event) => {
         
@@ -93,11 +92,9 @@ function AdminDeliveryPreview({requestPreview}) {
       {/* Spreadsheet Labels */}
       <div className="admin-product">
         <div className="admin-product-list">
-          <h3 className="admin-product-item admin-product-item-label">Name</h3>
-          <h3 className="admin-product-item admin-product-item-label">Cost</h3>
-          <h3 className="admin-product-item admin-product-item-label">
-            ParStock
-          </h3>
+          <h3 className="admin-product-item admin-product-item-label">Id</h3>
+          <h3 className="admin-product-item admin-product-item-label"> </h3>
+          <h3 className="admin-product-item admin-product-item-label"> </h3>
           <h3 className="admin-product-item admin-product-item-label">
             Quantity
           </h3>
@@ -111,15 +108,16 @@ function AdminDeliveryPreview({requestPreview}) {
         {/* Spreadsheet content  */}
         
 
-        {deliveryList[0].products.map((product, index) => {
+        {deliveryList.map((product, index) => {
           return (
             <form className="admin-product-list" key={product._id} id={product._id} onSubmit={handleReceiving}>
                       <p className="admin-product-item" id="productname">
-                      {product.name}
+                      {product.products._id}
                     </p>
                     <p className="admin-product-item">{product.cost}</p>
-                    <p className="admin-product-item">{product.parStock}</p>
-                    <input type="text" className="admin-product-item" placeholder={product.quantity} name="quantity" id="quantity" onChange={handleChange}/>
+                    <p className="admin-product-item">{product.cost}</p>
+                    <p className="admin-product-item">{product.quantityInc}</p>
+                    {/* <input type="text" className="admin-product-item" placeholder={product.quantityInc} name="quantity" id="quantity" onChange={handleChange}/> */}
                     <button className="admin-product-item" id='checkmark' data-index={index} type="submit">
                     ✅ 
                     </button>                 
