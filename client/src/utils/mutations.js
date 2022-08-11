@@ -25,18 +25,9 @@ export const ADD_USER = gql`
     }
 `
 export const CREATE_DELIVERY = gql`
-mutation CreateDelivery($productItem: [ID]) {
-  createDelivery(productItem: $productItem) {
+mutation CreateDelivery {
+  createDelivery {
     _id
-    createdAt
-    productItem {
-      _id
-      quantityInc
-      isShipped
-      products {
-        _id
-      }
-    }
   }
 }
 `

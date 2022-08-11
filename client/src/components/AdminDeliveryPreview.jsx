@@ -38,7 +38,9 @@ function AdminDeliveryPreview({requestPreview}) {
     if (error) return `Error! ${error.message}`;
     if (!data) return `nomoare daate`
     if (!loading && !error) {
+      console.log(data);
       deliveryList = data.findNotCompleteDelivery[0].productItem
+      console.log(deliveryList)
     };
 
     const handleReceiving = async (event) => {

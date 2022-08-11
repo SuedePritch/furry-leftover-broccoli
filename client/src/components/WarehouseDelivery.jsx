@@ -6,7 +6,7 @@ import {GET_NOT_COMPLETE_DELIVERY} from '../utils/queries'
 
 function WarehouseDeliveryList() {
   let deliveryList;
-  const { loading, error, data } = useQuery(GET_NOT_COMPLETE_DELIVERY, {variables: {isComplete: true}});
+  const { loading, error, data } = useQuery(GET_NOT_COMPLETE_DELIVERY, {variables: {isComplete: false}});
       if (loading) return 'Loading...';
       if (error) return `Error! ${error.message}`;
       if(!loading && !error){
