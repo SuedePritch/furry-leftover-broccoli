@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_NOT_COMPLETE_DELIVERY } from '../utils/queries';
 import { ADD_QUANTITY } from "../utils/mutations";
@@ -13,63 +13,55 @@ function AdminDeliveryPreview({requestPreview}) {
  const [deleteDelivery] = useMutation(DELETE_DELIVERY);
  const [deleteReload, setDeleteReload] = useState("james");
  const [recieveDeliveryItem, setRecieveItem] = useState({ id: '', quantity: ''})
-    // const [orderPreview, setOrderPreview] = useState(
-    //     [
-    //     {
-    //         "_id": "1",
-    //         "name": "Order Preview",
-    //         "description": "See it here",
-    //         "images": " ",
-    //         "price": "1",
-    //         "cost": "2",
-    //         "parStock": "3",
-    //         "quantity": "3",
-    //       }
-    // ])
-    // useEffect(() => {
-    //     setDeleteReload("nothing");
-    //     // console.log('helllo')
-    //   });
 
+ useEffect(() => {
+  setDeleteReload("nothing");
+ 
+});
 
     let deliveryList;
-    const { loading, error, data } = useQuery(GET_NOT_COMPLETE_DELIVERY, {variables:{isComplete: true}});
+    let deliveryInfo;
+    const { loading, error, data } = useQuery(GET_NOT_COMPLETE_DELIVERY, {variables:{isComplete: true}, pollInterval: 1000} );
     if (loading) return "Loading...";
     if (error) return `Error! ${error.message}`;
     if (!data) return `nomoare daate`
     if (!loading && !error) {
-      deliveryList = data.findNotCompleteDelivery[0].productItem
-      console.log(deliveryList)
+      if(data.findNotCompleteDelivery[0]){
+        deliveryList = data.findNotCompleteDelivery[0].productItem
+        deliveryInfo = data.findNotCompleteDelivery[0]
+      } else {
+        alert("warehouse is up to date");
+      window.location.assign('/admin');
+      }
+      
+      
     };
 
     const handleReceiving = async (event) => {
         const clickID = event.target.id
+        const targetedQuantity = event.target.dataset.quantity
+        const targetProduct = event.target.dataset.productid
+        
         event.preventDefault();
         
         try{
-            const deliveryMutation = await updateDelivery ({
-                variables: { id: clickID , quantity: JSON.parse(recieveDeliveryItem.quantity) }
-            });
-            // updateDelivery(deliveryMutation);
+                const addProductToInventory = await updateDelivery ({
+                  variables: { id: targetProduct, quantity: parseInt(targetedQuantity) }
+                })
 
-            const deliveryMutationB = await deleteFromDelivery ({
-                variables: { id: deliveryList._id , products: clickID }
+                const removeProductFromDelivery = await deleteFromDelivery ({
+                variables: { id: clickID , delivery: deliveryInfo._id }
+
             });
-            console.log(deliveryMutation, deliveryMutationB);
-            return 
+            setDeleteReload(Math.random());
+            console.log(deleteReload);
+            return addProductToInventory, removeProductFromDelivery;
 
         } catch (e) {
             console.log(e);
-        }  
+        }
+        
     };
-
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
-    //     setRecieveItem({
-    //         ...recieveDeliveryItem,
-    //         [name]: value,
-    //     });
-    // };
 
     const deleteCurrentDelivery = async (event) => {
         
@@ -77,8 +69,6 @@ function AdminDeliveryPreview({requestPreview}) {
             const deleteMutation = await deleteDelivery ({
                 variables: {id: event.target.id}
             })
-            setDeleteReload(Math.random());
-            console.log(deleteReload);
             return deleteMutation;
         } catch (e) {
             console.log(e);
@@ -110,7 +100,12 @@ function AdminDeliveryPreview({requestPreview}) {
 
         {deliveryList.map((product, index) => {
           return (
-            <form className="admin-product-list" key={product._id} id={product._id} onSubmit={handleReceiving}>
+            <form className="admin-product-list" 
+            key={product._id} 
+            id={product._id} 
+            data-productid={product.products._id}
+            data-quantity={product.quantityInc} 
+            onSubmit={handleReceiving}>
                       <p className="admin-product-item" id="productname">
                       {product.products._id}
                     </p>
@@ -125,7 +120,7 @@ function AdminDeliveryPreview({requestPreview}) {
             
           );
         })}
-        <button className="received-order-button" id={deliveryList[0]._id}  onClick={deleteCurrentDelivery}>Received Delivery</button>  
+        <button className="received-order-button" id={deliveryInfo._id}  onClick={deleteCurrentDelivery}>Received Delivery</button>  
       </div>
     </div>
   )
