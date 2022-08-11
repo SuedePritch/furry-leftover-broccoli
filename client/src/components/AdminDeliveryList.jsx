@@ -1,9 +1,12 @@
 import React,{useState, useEffect} from 'react'
 import { useMutation } from '@apollo/client';
-import {ADD_PRODUCT_DELIVERY} from '../utils/mutations'
+import {ADD_PRODUCT_DELIVERY, CREATE_DELIVERY} from '../utils/mutations'
+
 import '../styles/AdminDelivery.css'
 function AdminDeliveryList({requestPreview}) {
     const [addItemToDelivery] = useMutation(ADD_PRODUCT_DELIVERY)
+    const [createDelivery] = useMutation(CREATE_DELIVERY)
+    const [newDeliveryId, setNewDeliveryId] = useState()
     const [orderPreview, setOrderPreview] = useState(
         [
         {
@@ -21,25 +24,37 @@ function AdminDeliveryList({requestPreview}) {
         setOrderPreview(requestPreview)
       }, [requestPreview]);
 
+const createDeliveryId = async () =>{
+  try{
+    const grabbingDeliveryId = await createDelivery();
+    const deliveryId = grabbingDeliveryId.data.createDelivery._id
+    console.log(deliveryId);
+    setNewDeliveryId(deliveryId)
+  }
+  catch (e){
+    console.log(e)
+  }
+}
 
 
 
-
-      const updateQuantityInc = async (e)=>{
+      const updateQuantityInc = async (e, deliveryId)=>{
+        console.log(newDeliveryId);
+        
         const productForDeliveryEl = e.target.parentElement
         const productIdFromDeliveryRequest = productForDeliveryEl.firstChild.textContent
         const quantityInc = e.target.value
         
         try{
-              const creatingANewDelivery = await addItemToDelivery({
+              const addProductToDelivery = await addItemToDelivery({
                 variables: { 
                   products: productIdFromDeliveryRequest,
                   quantityInc: parseInt(quantityInc),
                   // This needs to be dynamic - maybe first non completed one
-                  delivery: "62f3b6c7aeb85738fd1a8b81"
+                  delivery: newDeliveryId
                 },
               });
-              return creatingANewDelivery
+              return addProductToDelivery
             } catch (e) {
               console.log(e);
           }
@@ -49,6 +64,7 @@ function AdminDeliveryList({requestPreview}) {
 
   return (
     <div>
+      <button onClick={createDeliveryId}>New Delivery</button>
               {orderPreview.map((deliveryItem) =>{
                 return <form className="admin-delivery-list" key={deliveryItem._id}>
                   <p className="admin-delivery-item" id='productname'>{deliveryItem._id}</p>
