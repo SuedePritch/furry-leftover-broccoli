@@ -1,39 +1,37 @@
-import React,{useState, useEffect} from 'react'
+// import React,{useState, useEffect} from 'react'
 import '../styles/AdminDelivery.css'
+import { useQuery } from '@apollo/client';
+import {GET_NOT_COMPLETE_DELIVERY} from '../utils/queries'
 
 
-function WarehouseDeliveryList({requestPreview}) {
-    const [orderPreview, setOrderPreview] = useState(
-        [
-        {
-            "_id": "1",
-            "name": "Order Preview",
-            "description": "See it here",
-            "images": " ",
-            "price": "1",
-            "cost": "2",
-            "parStock": "3",
-            "quantity": "3",
-          }
-    ])
-    useEffect(() => {
-        setOrderPreview(requestPreview)
-      }, [requestPreview]);
-
-
-
+function WarehouseDeliveryList() {
+  let deliveryList;
+  const { loading, error, data } = useQuery(GET_NOT_COMPLETE_DELIVERY, {variables: {isComplete: true}});
+      if (loading) return 'Loading...';
+      if (error) return `Error! ${error.message}`;
+      if(!loading && !error){
+      deliveryList = data.findNotCompleteDelivery[0].productItem
+      // console.log(deliveryList)
+    }
   return (
-    <div>
-              {orderPreview.map((deliveryItem) =>{
-                return <div className="admin-delivery-list" key={deliveryItem._id}>
+    <div className='admin-delivery'>
+      <h2>Warehouse</h2>
+        {deliveryList.map((deliveryItem) =>{
+                return <form className="admin-delivery-list" key={deliveryItem._id}>
                   <p className="admin-delivery-item" id='productname'>{deliveryItem._id}</p>
-                  <p className="admin-delivery-item">{deliveryItem.cost}</p>
+                  {/* <p className="admin-delivery-item">{deliveryItem.cost}</p>
                   <p className="admin-delivery-item">{deliveryItem.parStock}</p>
-                  <p className="admin-delivery-item">{deliveryItem.quantity}</p>
-                  <p className="admin-delivery-item"></p>
-                </div>
-              })}
-          </div>
+                  <p className="admin-delivery-item">{deliveryItem.quantity}</p> */}
+                  <p className="admin-delivery-item">{deliveryItem.quantityInc}</p>
+
+                  <input type="number" className="admin-delivery-item" id="admin-delivery-input" 
+                  // onBlur={updateQuantityInc} 
+                  placeholder={deliveryItem.quantityInc}
+                  ></input>
+                </form>
+        })}
+              <button type='submit'>All Items Shipped</button>
+    </div>
   )
 }
 

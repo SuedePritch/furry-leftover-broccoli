@@ -48,9 +48,7 @@ function AdminDelivery() {
 
 
 
-  const handleDeliveryCreation = async (event) =>{
-    console.log(requestPreview)
-  }
+  // const handleDeliveryCreation = async (event) =>{
   //   try{
   //     const creatingANewDelivery = await createDelivery({
   //       variables: { products: productIdListForDelivery},
@@ -163,14 +161,14 @@ const { loading, error, data } = useQuery(GET_ALL_PRODUCTS_ADMIN);
           </div>
             {/* Spreadsheet Labels */}
             <div className="admin-delivery">
-            <h3 className='create-order'>Delivery Preview<button onClick={handleDeliveryCreation}>Create Order</button></h3>
+            <h3 className='create-order'>Delivery Preview</h3>
             
               <div className="admin-delivery-list">
                 <h3 className="admin-delivery-item admin-delivery-item-label">Id</h3>
                 <h3 className="admin-delivery-item admin-delivery-item-label">Cost</h3>
                 <h3 className="admin-delivery-item admin-delivery-item-label">ParStock</h3>
                 <h3 className="admin-delivery-item admin-delivery-item-label">Quantity</h3>
-                <h3 className="admin-delivery-item admin-delivery-item-label">Edit</h3>
+                <h3 className="admin-delivery-item admin-delivery-item-label">#</h3>
                 {/* <h3 className="admin-delivery-item admin-delivery-item-label" id='addProduct'>+</h3> */}
               </div>
           <AdminDeliveryList requestPreview={requestPreview}/>
